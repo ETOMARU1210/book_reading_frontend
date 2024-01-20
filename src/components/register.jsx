@@ -16,7 +16,8 @@ const Register = () => {
     formState: { errors, isValid, isSubmitting },
   } = useForm();
   const handleLogin = (data) => {
-    e.preventDefault();
+
+    console.log(getValues("username"))
 
     authService.register(
       getValues("username"),
@@ -51,7 +52,7 @@ const Register = () => {
                 margin="normal"
                 fullWidth
                 label="ユーザーネーム"
-                {...register("email", { required: true })}
+                {...register("username", { required: true })}
               />
             </>
           )}
@@ -72,8 +73,8 @@ const Register = () => {
                 margin="normal"
                 fullWidth
                 label="メールアドレス"
-                {...register("username", { required: true, pattern: {
-                  value:  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                {...register("email", { required: true, pattern: {
+                  value:  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
                 }
                 })}
               />

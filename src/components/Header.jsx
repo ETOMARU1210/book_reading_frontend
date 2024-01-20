@@ -15,13 +15,29 @@ import AdbIcon from '@mui/icons-material/Adb';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import { Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
+import authService from '../services/auth.service';
 
-const pages = ['マイページ', '人気・新着', '検索'];
-const settings = ['プロフィール', 'ログイン', 'ログアウト'];
+const loginPages = ['マイページ', '人気・新着', '検索'];
+const nonloginPages = ["人気・新着"]
+const loginSettings = ['プロフィール', 'ログアウト'];
+const nonloginSettings = ["ログイン"]
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [currentUser, setCurrentUser] = React.useState(undefined);
+
+  React.useEffect(() => {
+    const user = authService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
+
+  const logOut = () => {
+    authService.logout();
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -90,7 +106,7 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
+              {loginPages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
@@ -118,7 +134,8 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
 >
-            {pages.map((page) => (
+            {currentUser ? (
+            loginPages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -129,7 +146,21 @@ function ResponsiveAppBar() {
                 {page}
                 </Stack>
               </Button>
-            ))}
+            ))) :
+            (
+            nonloginPages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                <Stack direction="row" alignItems="top">
+                {page === "検索" && <ManageSearchIcon fontSize='small'/>}
+                {page}
+                </Stack>
+              </Button>
+            )))
+          }
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -154,7 +185,9 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {
+              currentUser ? (
+              loginSettings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   {
                     setting === "ログイン" ?
@@ -167,7 +200,22 @@ function ResponsiveAppBar() {
                     <Typography textAlign="center">{setting}</Typography>
                   }
                 </MenuItem>
-              ))}
+              ))) : (
+                nonloginSettings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    {
+                      setting === "ログイン" ?
+                         <Typography textAlign="center">
+                          <Link to="/login" underline="none" style={{textDecoration: 'none', color: "black"}}>
+                          {setting}
+                          </Link>
+                          </Typography>
+                      :
+                      <Typography textAlign="center">{setting}</Typography>
+                    }
+                  </MenuItem>
+              )))
+              }
             </Menu>
           </Box>
         </Toolbar>
