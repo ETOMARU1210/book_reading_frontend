@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import Register from "./components/register";
 import Profile from "./components/Profile";
+import Footer from "./components/Footer";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Route path="/signup" element={<Register />} />
       <Route path="/profile" element={<Profile />} />
     </Routes>
+    <Footer />
     </>
   )
 }

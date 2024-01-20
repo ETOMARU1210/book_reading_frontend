@@ -68,11 +68,8 @@ const Profile = () => {
           Item Two
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          Item Three
-        </CustomTabPanel>
-      </Box>
-      <div className="container">
-        <header className="jumbotron">
+        <div>
+        <header>
           <h3>
             <strong>{currentUser.username}</strong> Profile
           </h3>
@@ -93,6 +90,9 @@ const Profile = () => {
             currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
         </ul>
       </div>
+        </CustomTabPanel>
+      </Box>
+      
     </Container>
   );
 };
