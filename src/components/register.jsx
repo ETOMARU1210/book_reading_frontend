@@ -1,13 +1,11 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 
 const Register = () => {
-  let location = useLocation();
   let navigate = useNavigate();
-  let params = useParams();
 
   const {
     handleSubmit,
@@ -17,14 +15,12 @@ const Register = () => {
   } = useForm();
   const handleLogin = (data) => {
 
-    console.log(getValues("username"))
-
     authService.register(
       getValues("username"),
       getValues("email"),
       getValues("password")
     ).then(() => {
-      navigate("/home");
+      navigate("/");
       window.location.reload();
     });
   };

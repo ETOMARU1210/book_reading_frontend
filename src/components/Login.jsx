@@ -18,7 +18,7 @@ const Login = () => {
   const handleLogin = (data) => {
 
     authService.login(getValues("username"), getValues("password")).then(() => {
-      navigate("/home");
+      navigate("/");
       window.location.reload();
     });
   };

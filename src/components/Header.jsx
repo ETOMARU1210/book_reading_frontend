@@ -18,9 +18,9 @@ import { Link } from 'react-router-dom';
 import authService from '../services/auth.service';
 
 const loginPages = ['マイページ', '人気・新着', '検索'];
-const nonloginPages = ["人気・新着"]
+const nonloginPages = ["人気・新着"];
 const loginSettings = ['プロフィール', 'ログアウト'];
-const nonloginSettings = ["ログイン"]
+const nonloginSettings = ["サインアップ", "ログイン"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -190,12 +190,8 @@ function ResponsiveAppBar() {
               loginSettings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   {
-                    setting === "ログイン" ?
-                       <Typography textAlign="center">
-                        <Link to="/login" underline="none" style={{textDecoration: 'none', color: "black"}}>
-                        {setting}
-                        </Link>
-                        </Typography>
+                    setting === "ログアウト" ?
+                       <Button variant="text" onClick={logOut} style={{color: "black", fontSize: "16px"}}>ログアウト</Button>
                     :
                     <Typography textAlign="center">{setting}</Typography>
                   }
