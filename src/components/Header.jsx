@@ -18,7 +18,7 @@ import authService from "../services/auth.service";
 
 function ResponsiveAppBar() {
   const loginPages = ["マイページ", "人気・新着", "検索"];
-  const loginPagesUrl = ["/profile", "", ""];
+  const loginPagesUrl = ["/profile", "", "/search"];
   const nonloginPages = ["人気・新着"];
   const loginSettings = ["プロフィール", "ログアウト"];
   const nonloginSettings = ["サインアップ", "ログイン"];
