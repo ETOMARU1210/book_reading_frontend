@@ -2,6 +2,7 @@ import { Button, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import authService from "../services/auth.service";
 
 const Login = () => {
   let location = useLocation();
@@ -15,10 +16,9 @@ const Login = () => {
     formState: { errors, isValid, isSubmitting },
   } = useForm();
   const handleLogin = (data) => {
-    e.preventDefault();
 
-    AuthService.login(getValues("username"), getValues("password")).then(() => {
-      this.props.router.navigate("/profile");
+    authService.login(getValues("username"), getValues("password")).then(() => {
+      navigate("/");
       window.location.reload();
     });
   };

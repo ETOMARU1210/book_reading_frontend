@@ -1,27 +1,42 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
-import { Stack } from '@mui/material';
-import { Link } from 'react-router-dom';
-
-const pages = ['マイページ', '人気・新着', '検索'];
-const settings = ['プロフィール', 'ログイン', 'ログアウト'];
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import AdbIcon from "@mui/icons-material/Adb";
+import ManageSearchIcon from "@mui/icons-material/ManageSearch";
+import { Link, Stack } from "@mui/material";
+import authService from "../services/auth.service";
 
 function ResponsiveAppBar() {
+  const loginPages = ["マイページ", "人気・新着", "検索"];
+  const loginPagesUrl = ["/profile", "", "/search"];
+  const nonloginPages = ["人気・新着"];
+  const loginSettings = ["プロフィール", "ログアウト"];
+  const nonloginSettings = ["サインアップ", "ログイン"];
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [currentUser, setCurrentUser] = React.useState(undefined);
+
+  React.useEffect(() => {
+    const user = authService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
+
+  const logOut = () => {
+    authService.logout();
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -39,10 +54,10 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position='static'>
+    <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -50,18 +65,18 @@ function ResponsiveAppBar() {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             読書アプリ
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -76,28 +91,34 @@ function ResponsiveAppBar() {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
+              {loginPages.map((page, index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Link
+                    href={loginPagesUrl[index]}
+                    underline="none"
+                    style={{ color: "black" }}
+                  >
+                    {page}
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -105,31 +126,47 @@ function ResponsiveAppBar() {
             href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             読書アプリ
           </Typography>
-          <Box sx={{flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
->
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                <Stack direction="row" alignItems="top">
-                {page === "検索" && <ManageSearchIcon fontSize='small'/>}
-                {page}
-                </Stack>
-              </Button>
-            ))}
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {currentUser
+              ? loginPages.map((page, index) => (
+                <Link  key={page} href={loginPagesUrl[index]} underline="none" style={{color: "white"}}>
+                  {/* <Button
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: "white", display: "block" }}
+                  > */}
+                    <Stack direction="row" alignItems="top" mr={3}>      
+                        {page === "検索" && (
+                          <ManageSearchIcon fontSize="small" />
+                        )}
+                        {page}
+                    </Stack>
+                  {/* </Button> */}
+                  </Link>
+                ))
+              : nonloginPages.map((page) => (
+                  <Button
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: "white", display: "block" }}
+                  >
+                    <Stack direction="row" alignItems="top">
+                      {page === "検索" && <ManageSearchIcon fontSize="small" />}
+                      {page}
+                    </Stack>
+                  </Button>
+                ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -139,35 +176,62 @@ function ResponsiveAppBar() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  {
-                    setting === "ログイン" ?
-                       <Typography textAlign="center">
-                        <Link to="/login" underline="none" style={{textDecoration: 'none', color: "black"}}>
-                        {setting}
-                        </Link>
+              {currentUser
+                ? loginSettings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      {setting === "ログアウト" ? (
+                        <Button
+                          variant="text"
+                          onClick={logOut}
+                          style={{ color: "black", fontSize: "16px" }}
+                        >
+                          ログアウト
+                        </Button>
+                      ) : (
+                        <Typography textAlign="center">{setting}</Typography>
+                      )}
+                    </MenuItem>
+                  ))
+                : nonloginSettings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      {setting === "ログイン" ? (
+                        <Typography textAlign="center">
+                          <Link
+                            to="/login"
+                            underline="none"
+                            style={{ textDecoration: "none", color: "black" }}
+                          >
+                            {setting}
+                          </Link>
                         </Typography>
-                    :
-                    <Typography textAlign="center">{setting}</Typography>
-                  }
-                </MenuItem>
-              ))}
+                      ) : (
+                        <Typography textAlign="center">
+                          <Link
+                            to="/signup"
+                            underline="none"
+                            style={{ textDecoration: "none", color: "black" }}
+                          >
+                            {setting}
+                          </Link>
+                        </Typography>
+                      )}
+                    </MenuItem>
+                  ))}
             </Menu>
           </Box>
         </Toolbar>

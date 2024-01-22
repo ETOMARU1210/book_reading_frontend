@@ -3,8 +3,17 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import authService from "../services/auth.service";
 
 const Home = () => {
+
+  const [currentUser, setCurrentUser] = useState(undefined);
+
+  useEffect(() => {
+    setCurrentUser(authService.getCurrentUser());
+  }, []);
+
   return (
     <Container>
       <Box mt={5} textAlign="center">
@@ -165,16 +174,21 @@ const Home = () => {
           </Grid>
         </Grid>
       </Box>
-      <Stack mt={5} textAlign="center" mb={{xs: 5}}>
-        <Typography variant="button" gutterBottom fontSize={24} fontWeight="bold">
-          あなたはどのくらい読んでいますか？
-        </Typography>
-        <Button variant="outlined" color="error">
+        {
+          !currentUser && (
+             <Stack mt={5} textAlign="center" mb={{xs: 5}}>
+             <Typography variant="button" gutterBottom fontSize={24} fontWeight="bold">
+               あなたはどのくらい読んでいますか？
+             </Typography>
+          !currentUser && (
+            <Button variant="outlined" color="error">
             <Link to="/login" style={{textDecoration: "none", color: "red"}}>
               ログインして始める
             </Link>
         </Button>
-      </Stack>
+        </Stack>
+          )
+        }
     </Container>
   );
 };

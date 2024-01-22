@@ -1,13 +1,11 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 
 const Register = () => {
-  let location = useLocation();
   let navigate = useNavigate();
-  let params = useParams();
 
   const {
     handleSubmit,
@@ -16,14 +14,13 @@ const Register = () => {
     formState: { errors, isValid, isSubmitting },
   } = useForm();
   const handleLogin = (data) => {
-    e.preventDefault();
 
     authService.register(
       getValues("username"),
       getValues("email"),
       getValues("password")
     ).then(() => {
-      navigate("/home");
+      navigate("/");
       window.location.reload();
     });
   };
@@ -51,7 +48,7 @@ const Register = () => {
                 margin="normal"
                 fullWidth
                 label="ユーザーネーム"
-                {...register("email", { required: true })}
+                {...register("username", { required: true })}
               />
             </>
           )}
@@ -72,8 +69,8 @@ const Register = () => {
                 margin="normal"
                 fullWidth
                 label="メールアドレス"
-                {...register("username", { required: true, pattern: {
-                  value:  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                {...register("email", { required: true, pattern: {
+                  value:  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
                 }
                 })}
               />
