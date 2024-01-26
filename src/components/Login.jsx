@@ -5,9 +5,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import authService from "../services/auth.service";
 
 const Login = () => {
-  let location = useLocation();
   let navigate = useNavigate();
-  let params = useParams();
 
   const {
     handleSubmit,

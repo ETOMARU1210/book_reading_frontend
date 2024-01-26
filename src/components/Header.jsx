@@ -15,6 +15,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import { Link, Stack } from "@mui/material";
 import authService from "../services/auth.service";
+import LoginIcon from '@mui/icons-material/Login';
 
 function ResponsiveAppBar() {
   const loginPages = ["マイページ", "人気・新着", "検索"];
@@ -22,6 +23,7 @@ function ResponsiveAppBar() {
   const nonloginPages = ["人気・新着"];
   const loginSettings = ["プロフィール", "ログアウト"];
   const nonloginSettings = ["サインアップ", "ログイン"];
+  const nonloginUrl = ["/signup", "/login"]
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState(undefined);
@@ -141,18 +143,12 @@ function ResponsiveAppBar() {
             {currentUser
               ? loginPages.map((page, index) => (
                 <Link  key={page} href={loginPagesUrl[index]} underline="none" style={{color: "white"}}>
-                  {/* <Button
-                    key={page}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: "white", display: "block" }}
-                  > */}
                     <Stack direction="row" alignItems="top" mr={3}>      
                         {page === "検索" && (
                           <ManageSearchIcon fontSize="small" />
                         )}
                         {page}
                     </Stack>
-                  {/* </Button> */}
                   </Link>
                 ))
               : nonloginPages.map((page) => (
@@ -170,9 +166,9 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="設定">
+            <Tooltip title="サインアップ・ログイン">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <LoginIcon fontSize="large" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -207,29 +203,17 @@ function ResponsiveAppBar() {
                       )}
                     </MenuItem>
                   ))
-                : nonloginSettings.map((setting) => (
+                : nonloginSettings.map((setting, index) => (
                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      {setting === "ログイン" ? (
                         <Typography textAlign="center">
                           <Link
-                            to="/login"
+                            href={nonloginUrl[index]}
                             underline="none"
                             style={{ textDecoration: "none", color: "black" }}
                           >
                             {setting}
                           </Link>
                         </Typography>
-                      ) : (
-                        <Typography textAlign="center">
-                          <Link
-                            to="/signup"
-                            underline="none"
-                            style={{ textDecoration: "none", color: "black" }}
-                          >
-                            {setting}
-                          </Link>
-                        </Typography>
-                      )}
                     </MenuItem>
                   ))}
             </Menu>

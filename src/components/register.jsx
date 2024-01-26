@@ -106,7 +106,7 @@ const Register = () => {
             type="submit"
             disabled={!isValid || isSubmitting}
           >
-            ログイン
+            ユーザー登録する
           </Button>
         </form>
       </LoginCard>
