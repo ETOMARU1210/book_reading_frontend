@@ -1,4 +1,11 @@
-import { Box, Button, CardMedia, Container, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CardMedia,
+  Container,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -7,7 +14,6 @@ import { useEffect, useState } from "react";
 import authService from "../services/auth.service";
 
 const Home = () => {
-
   const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
@@ -76,17 +82,17 @@ const Home = () => {
         </Typography>
         <Grid
           container
-          rowSpacing={{xs: 2, sm: 2, md: 3}}
+          rowSpacing={{ xs: 2, sm: 2, md: 3 }}
           columnSpacing={{ xs: 2, sm: 2, md: 3 }}
           mt={3}
         >
           <Grid item xs={12} md={6}>
             <Card>
-            <CardMedia
+              <CardMedia
                 component="img"
                 image="src\assets\img\magnifying_glass.png"
                 alt="虫眼鏡の画像"
-                style={ {maxWidth: "50%", height: "auto"}}
+                style={{ maxWidth: "50%", height: "auto" }}
               />
               <CardContent>
                 <Typography
@@ -103,13 +109,13 @@ const Home = () => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item  xs={12}  md={6}>
+          <Grid item xs={12} md={6}>
             <Card>
-            <CardMedia
+              <CardMedia
                 component="img"
                 image="src\assets\img\registration.png"
                 alt="本の登録画像"
-                style={ {maxWidth: "58%", height: "auto"}}
+                style={{ maxWidth: "58%", height: "auto" }}
               />
               <CardContent>
                 <Typography
@@ -128,11 +134,11 @@ const Home = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Card>
-            <CardMedia
+              <CardMedia
                 component="img"
                 image="src\assets\img\praise.png"
                 alt="自分をほめている画像"
-                style={ {maxWidth: "58%", height: "auto"}}
+                style={{ maxWidth: "58%", height: "auto" }}
               />
               <CardContent>
                 <Typography
@@ -149,13 +155,13 @@ const Home = () => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item  xs={12}  md={6}>
+          <Grid item xs={12} md={6}>
             <Card>
-            <CardMedia
+              <CardMedia
                 component="img"
                 image="src\assets\img\flowchart.png"
                 alt="フローチャートの画像"
-                style={ {maxWidth: "44%", height: "auto"}}
+                style={{ maxWidth: "44%", height: "auto" }}
               />
               <CardContent>
                 <Typography
@@ -174,21 +180,24 @@ const Home = () => {
           </Grid>
         </Grid>
       </Box>
-        {
+      {
+        <Stack mt={5} textAlign="center" mb={{ xs: 5 }}>
+          <Typography
+            variant="button"
+            gutterBottom
+            fontSize={24}
+            fontWeight="bold"
+          >
+            あなたはどのくらい読んでいますか？
+          </Typography>
           !currentUser && (
-             <Stack mt={5} textAlign="center" mb={{xs: 5}}>
-             <Typography variant="button" gutterBottom fontSize={24} fontWeight="bold">
-               あなたはどのくらい読んでいますか？
-             </Typography>
-          !currentUser && (
-            <Button variant="outlined" color="error">
-            <Link to="/login" style={{textDecoration: "none", color: "red"}}>
+          <Button variant="outlined" color="error">
+            <Link to="/login" style={{ textDecoration: "none", color: "red" }}>
               ログインして始める
             </Link>
-        </Button>
+          </Button>
         </Stack>
-          )
-        }
+      }
     </Container>
   );
 };

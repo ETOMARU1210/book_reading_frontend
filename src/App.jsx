@@ -5,10 +5,12 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import Register from "./components/register";
 import Profile from "./components/Profile";
-import Footer from "./components/Footer";
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import { Link as Scroll } from "react-scroll";
 import Search from "./components/Search";
+import {
+  RecoilRoot
+} from 'recoil';
 
 
 function App() {
@@ -60,10 +62,10 @@ function App() {
   const style = isButtonActive ? activeStyle : normalStyle;
 
   return (
-    <>
+    <RecoilRoot>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
@@ -72,8 +74,7 @@ function App() {
       <ArrowCircleUpIcon style={style} onClick={returnTop}>
         <Scroll to="Home" smooth={true} duration={500}></Scroll>
       </ArrowCircleUpIcon>
-      <Footer />
-    </>
+    </RecoilRoot>
   );
 }
 
