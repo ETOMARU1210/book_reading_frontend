@@ -11,7 +11,7 @@ class BookService {
     const authToken = user.accessToken; 
 
     const axiosInstance = axios.create({
-      baseURL: API_URL + "/add",
+      baseURL: API_URL,
       headers: {
       Authorization: `Bearer ${authToken}`
       }
@@ -20,6 +20,7 @@ class BookService {
       username: user.username,
       title: book.Item.title,
       author: book.Item.author,
+      largeImageUrl: book.Item.largeImageUrl,
       publisherName: book.Item.publisherName,
       itemPrice: book.Item.itemPrice,
       reviewAverage: book.Item.reviewAverage
@@ -28,7 +29,9 @@ class BookService {
         'Access-Control-Allow-Origin': 'http://localhost:8080'
       }
     }
-      );
+      ).then(response => {
+        console.log(response)
+      });
   }
 }
 
