@@ -180,7 +180,6 @@ const Home = () => {
           </Grid>
         </Grid>
       </Box>
-      {
         <Stack mt={5} textAlign="center" mb={{ xs: 5 }}>
           <Typography
             variant="button"
@@ -190,14 +189,17 @@ const Home = () => {
           >
             あなたはどのくらい読んでいますか？
           </Typography>
+          {
           !currentUser && (
           <Button variant="outlined" color="error">
             <Link to="/login" style={{ textDecoration: "none", color: "red" }}>
               ログインして始める
             </Link>
           </Button>
+          )
+                }
         </Stack>
-      }
+
     </Container>
   );
 };
