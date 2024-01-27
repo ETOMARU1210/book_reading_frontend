@@ -8,7 +8,8 @@ class AuthService {
     .post(API_URL + "signin", {
       username,
       password
-    })
+    }
+    )
     .then(response => {
       if (response.data.accessToken) {
         console.log(response.data);

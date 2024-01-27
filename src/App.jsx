@@ -41,26 +41,6 @@ function App() {
     }
   };
 
-  const normalStyle = {
-    opacity: 0,
-    transition: "0.5s",
-    pointerEvents: "none",
-    position: "fixed",
-    right: "4rem",
-    bottom: "2.5rem",
-    fontSize: 100,
-  };
-  const activeStyle = {
-    opacity: 1,
-    transition: "0.5s",
-    position: "fixed",
-    right: "4rem",
-    bottom: "2.5rem",
-    fontSize: 100,
-  };
-
-  const style = isButtonActive ? activeStyle : normalStyle;
-
   return (
     <RecoilRoot>
       <Header />
@@ -71,9 +51,6 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/search" element={<Search />} />
       </Routes>
-      <ArrowCircleUpIcon style={style} onClick={returnTop}>
-        <Scroll to="Home" smooth={true} duration={500}></Scroll>
-      </ArrowCircleUpIcon>
     </RecoilRoot>
   );
 }
