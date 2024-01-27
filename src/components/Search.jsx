@@ -36,11 +36,12 @@ const Search = () => {
        )
       .then((response) => {
         setBooks(response.data.Items);
+        console.log(response.data.Items)
       })
   };
 
-  const booksSubmit = () => {
-    bookService.addBooks(books);
+  const booksSubmit = (book) => {
+    bookService.addBooks(book);
   }
 
   return (
@@ -87,6 +88,7 @@ const Search = () => {
             gridTemplateColumns: "174px 1fr",
             display: "grid"
           }}
+          key={book.Item.isbn}
         >
           <Box
             style={{
@@ -137,7 +139,7 @@ const Search = () => {
                 marginTop: "8px",
               }}
             >
-              <Button style={{ background: "#776f59", color: "#fff" }} onClick={booksSubmit}>
+              <Button style={{ background: "#776f59", color: "#fff" }} onClick={() => booksSubmit(book)}>
                 これを読む
                 <BookIcon style={{ marginLeft: "0.1875em" }} />
               </Button>
