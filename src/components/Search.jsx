@@ -13,8 +13,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import BookIcon from "@mui/icons-material/Book";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { useRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { SearchState }  from "../store/SearchState";
+import bookService from "../services/book.service";
 
 const Search = () => {
   const {
@@ -35,8 +36,13 @@ const Search = () => {
        )
       .then((response) => {
         setBooks(response.data.Items);
+        console.log(response.data.Items)
       })
   };
+
+  const booksSubmit = (book) => {
+    bookService.addBooks(book);
+  }
 
   return (
     <Container>
@@ -79,8 +85,10 @@ const Search = () => {
             background: "linear-gradient(#b08d5b,#c2a274)",
             padding: "20px 16px 0",
             gridTemplateRows: "1fr 1fr 56px",
-            gridAutoColumns: "174px 1fr",
+            gridTemplateColumns: "174px 1fr",
+            display: "grid"
           }}
+          key={book.Item.isbn}
         >
           <Box
             style={{
@@ -115,10 +123,10 @@ const Search = () => {
               textAlign: "right",
             }}
           >
-            <Typography variant="caption" display="block" gutterBottom>
-              {book.Item.author + "/" + book.Item.publisherName}
+            <Typography variant="body2"  gutterBottom>
+              {book.Item.author + " / " + book.Item.publisherName}
             </Typography>
-            <Typography variant="caption" display="block" gutterBottom>
+            <Typography variant="body2" gutterBottom>
               {book.Item.itemPrice + "円" + " / " +  "評価 :" + book.Item.reviewAverage}
             </Typography>
           </Box>
@@ -131,7 +139,7 @@ const Search = () => {
                 marginTop: "8px",
               }}
             >
-              <Button style={{ background: "#776f59", color: "#fff" }}>
+              <Button style={{ background: "#776f59", color: "#fff" }} onClick={() => booksSubmit(book)}>
                 これを読む
                 <BookIcon style={{ marginLeft: "0.1875em" }} />
               </Button>
