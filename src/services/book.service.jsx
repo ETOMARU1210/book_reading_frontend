@@ -40,6 +40,34 @@ class BookService {
         window.location.reload();
       });
   }
+
+  allBooks() {
+    const API_URL = "http://localhost:8080/api/books/";
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const authToken = user.accessToken;
+
+    const axiosInstance = axios.create({
+      baseURL: API_URL,
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+
+    axiosInstance
+      .get(
+        API_URL + "all",
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "http://localhost:8080",
+          },
+        }
+      )
+      // .then((response) => {
+      //   console.log(response);
+      // });
+  }
 }
 
 export default new BookService();

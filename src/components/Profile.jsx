@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import AuthService from "../services/auth.service";
 import { Box, Container, Grid, Tab, Tabs } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useRecoilState } from "recoil";
 import { SearchState } from "../store/SearchState";
+import bookService from "../services/book.service";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
+
+  useEffect(() => {
+    bookService.allBooks();
+  }, [])
 
   return (
     <div
