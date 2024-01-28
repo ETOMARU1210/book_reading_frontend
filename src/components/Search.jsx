@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { SearchState }  from "../store/SearchState";
 import bookService from "../services/book.service";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const {
@@ -23,6 +24,8 @@ const Search = () => {
     handleSubmit,
     getValues
   } = useForm();
+
+  const navigate = useNavigate();
 
   const [books, setBooks] = useRecoilState(SearchState);
 
@@ -41,7 +44,7 @@ const Search = () => {
   };
 
   const booksSubmit = (book) => {
-    bookService.addBooks(book);
+    bookService.addBooks(book, navigate);
   }
 
   return (
