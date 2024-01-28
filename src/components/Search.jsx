@@ -39,7 +39,6 @@ const Search = () => {
        )
       .then((response) => {
         setBooks(response.data.Items);
-        console.log(response.data.Items)
       })
   };
 

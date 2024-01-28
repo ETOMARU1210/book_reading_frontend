@@ -16,6 +16,7 @@ import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import { Link, Stack } from "@mui/material";
 import authService from "../services/auth.service";
 import LoginIcon from '@mui/icons-material/Login';
+import { useNavigate } from "react-router-dom";
 
 function ResponsiveAppBar() {
   const loginPages = ["マイページ", "人気・新着", "検索"];
@@ -28,6 +29,8 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState(undefined);
 
+  const navigate = useNavigate();
+
   React.useEffect(() => {
     const user = authService.getCurrentUser();
 
@@ -38,6 +41,7 @@ function ResponsiveAppBar() {
 
   const logOut = () => {
     authService.logout();
+    navigate("/");
   };
 
   const handleOpenNavMenu = (event) => {

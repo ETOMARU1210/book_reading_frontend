@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import AuthService from "../services/auth.service";
 import { Box, Container, Grid, Tab, Tabs } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useRecoilState } from "recoil";
-import { SearchState } from "../store/SearchState";
 import bookService from "../services/book.service";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
+
   return (
     <div
       role="tabpanel"
@@ -42,9 +42,21 @@ function a11yProps(index) {
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
 
-  const [value, setValue] = useState("one");
+  const [value, setValue] = useState(0);
 
-  const [books, setBooks ] = useRecoilState(SearchState);
+  const [allUnBooks, setAllUnBooks] = useState([]);
+  const [allCompleteBooks, setAllCompleteBooks] = useState([]);
+
+  useEffect(() => {
+    bookService.allUnStatusBooks().then(response => {
+      console.log(response)
+      setAllUnBooks(response);
+    })
+    bookService.allCompleteStatusBooks().then(response => {
+      console.log(response)
+      setAllCompleteBooks(response);
+    })
+  }, [])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -65,12 +77,30 @@ const Profile = () => {
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          {
-            console.log(bookService.allBooks())
-          }
+          <Grid container spacing={1}>
+          {allUnBooks.map((book) => 
+            (
+              <Grid item md={2} xs={4}>
+                <img
+                  src={book.largeImageUrl}
+                  />
+              </Grid>
+
+          ))}
+          </Grid>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          Item Two
+        <Grid container spacing={1}>
+          {allCompleteBooks.map((book) => 
+            (
+              <Grid item md={2} xs={4}>
+                <img
+                  src={book.largeImageUrl}
+                  />
+              </Grid>
+
+          ))}
+          </Grid>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
           <Grid
@@ -105,13 +135,19 @@ const Profile = () => {
                 boxShadoデータw: "2px 2px 4px rgba(0,0,0,.3)",
               }}
             >
-              <Typography mt={1} variant="h5" display="block" gutterBottom style={{fontWeight: "bold"}}>
+              <Typography
+                mt={1}
+                variant="h5"
+                display="block"
+                gutterBottom
+                style={{ fontWeight: "bold" }}
+              >
                 本のデータ
               </Typography>
-              <Typography mt={1} variant="h6" display="block" gutterBottom >
+              <Typography mt={1} variant="h6" display="block" gutterBottom>
                 未読了：1冊
               </Typography>
-              <Typography mt={1} variant="h6" display="block" gutterBottom >
+              <Typography mt={1} variant="h6" display="block" gutterBottom>
                 読了：1冊
               </Typography>
             </Grid>

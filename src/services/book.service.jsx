@@ -1,7 +1,5 @@
 import axios from "axios";
 
-import { useNavigate } from "react-router-dom";
-
 class BookService {
   addBooks(book, navigate) {
     const API_URL = "http://localhost:8080/api/books/";
@@ -36,12 +34,12 @@ class BookService {
         }
       )
       .then((response) => {
-        navigate("/");
+        navigate("/profile");
         window.location.reload();
       });
   }
 
-  allBooks() {
+  allUnStatusBooks() {
     const API_URL = "http://localhost:8080/api/books/";
 
     const user = JSON.parse(localStorage.getItem("user"));
@@ -54,18 +52,38 @@ class BookService {
         Authorization: `Bearer ${authToken}`,
       },
     });
-
-    axiosInstance
-      .get(
-        API_URL + "all",
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "http://localhost:8080",
-          },
-        }
-      )
+    return axiosInstance
+      .get(API_URL + "allunstatus", {
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:8080",
+        },
+      })
       .then((response) => {
-        console.log(response);
+        return response.data;
+      });
+  }
+
+  allCompleteStatusBooks() {
+    const API_URL = "http://localhost:8080/api/books/";
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const authToken = user.accessToken;
+
+    const axiosInstance = axios.create({
+      baseURL: API_URL,
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+    return axiosInstance
+      .get(API_URL + "allcompletestatus", {
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:8080",
+        },
+      })
+      .then((response) => {
+        return response.data;
       });
   }
 }
