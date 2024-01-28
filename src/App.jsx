@@ -5,8 +5,6 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import Register from "./components/register";
 import Profile from "./components/Profile";
-import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
-import { Link as Scroll } from "react-scroll";
 import Search from "./components/Search";
 import {
   RecoilRoot
