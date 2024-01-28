@@ -64,9 +64,9 @@ class BookService {
           },
         }
       )
-      // .then((response) => {
-      //   console.log(response);
-      // });
+      .then((response) => {
+        console.log(response);
+      });
   }
 }
 
