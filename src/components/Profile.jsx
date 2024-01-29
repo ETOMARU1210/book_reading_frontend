@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import AuthService from "../services/auth.service";
-import { Box, Container, Grid, Tab, Tabs } from "@mui/material";
+import { Box, Button, Container, Grid, Tab, Tabs } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { useRecoilState } from "recoil";
 import bookService from "../services/book.service";
 
 function CustomTabPanel(props) {
@@ -46,17 +45,21 @@ const Profile = () => {
 
   const [allUnBooks, setAllUnBooks] = useState([]);
   const [allCompleteBooks, setAllCompleteBooks] = useState([]);
+  
+  const statusCompleteUpdate = (isbn, navigate) => {
+    bookService.statusComplete(isbn);
+  }
 
   useEffect(() => {
-    bookService.allUnStatusBooks().then(response => {
-      console.log(response)
+    bookService.allUnStatusBooks().then((response) => {
+      console.log(response);
       setAllUnBooks(response);
-    })
-    bookService.allCompleteStatusBooks().then(response => {
-      console.log(response)
+    });
+    bookService.allCompleteStatusBooks().then((response) => {
+      console.log(response);
       setAllCompleteBooks(response);
-    })
-  }, [])
+    });
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -78,28 +81,23 @@ const Profile = () => {
         </Box>
         <CustomTabPanel value={value} index={0}>
           <Grid container spacing={1}>
-          {allUnBooks.map((book) => 
-            (
-              <Grid item md={2} xs={4}>
-                <img
-                  src={book.largeImageUrl}
-                  />
+            {allUnBooks.map((book) => (
+              <Grid item md={2} xs={4} key={book.isbn}>
+                <img src={book.largeImageUrl} width="100%"/>
+                <Button variant="outlined" color="success" style={{width: "100%"}} onClick={() => statusCompleteUpdate(book.isbn)}>
+                  読了
+                </Button>
               </Grid>
-
-          ))}
+            ))}
           </Grid>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-        <Grid container spacing={1}>
-          {allCompleteBooks.map((book) => 
-            (
+          <Grid container spacing={1}>
+            {allCompleteBooks.map((book) => (
               <Grid item md={2} xs={4}>
-                <img
-                  src={book.largeImageUrl}
-                  />
+                <img src={book.largeImageUrl} />
               </Grid>
-
-          ))}
+            ))}
           </Grid>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
@@ -145,10 +143,10 @@ const Profile = () => {
                 本のデータ
               </Typography>
               <Typography mt={1} variant="h6" display="block" gutterBottom>
-                未読了：1冊
+                未読了：{allUnBooks.length}冊
               </Typography>
               <Typography mt={1} variant="h6" display="block" gutterBottom>
-                読了：1冊
+                読了：{allCompleteBooks.length}冊
               </Typography>
             </Grid>
           </Grid>
