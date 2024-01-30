@@ -21,7 +21,6 @@ const Register = () => {
       getValues("password")
     ).then(() => {
       navigate("/");
-      window.location.reload();
     });
   };
 

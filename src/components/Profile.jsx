@@ -39,15 +39,18 @@ function a11yProps(index) {
 }
 
 const Profile = () => {
+
   const currentUser = AuthService.getCurrentUser();
 
   const [value, setValue] = useState(0);
+  const [total, setTotal] = useState(0);
 
   const [allUnBooks, setAllUnBooks] = useState([]);
   const [allCompleteBooks, setAllCompleteBooks] = useState([]);
   
-  const statusCompleteUpdate = (isbn, navigate) => {
+  const statusCompleteUpdate = (isbn) => {
     bookService.statusComplete(isbn);
+    location.reload();
   }
 
   useEffect(() => {
@@ -59,6 +62,17 @@ const Profile = () => {
       console.log(response);
       setAllCompleteBooks(response);
     });
+  //   bookService.allBooks().then(response => {
+  //     return response.reduce(function(total, element))   {
+  //       return parseInt(total)  + parseInt(element);
+  // })
+  bookService.allBooks().then(response => {
+    let total = 0;
+    response.forEach(element => {
+      total += parseInt(element.itemPrice);
+    });
+    setTotal(total);
+  })
   }, []);
 
   const handleChange = (event, newValue) => {
@@ -112,7 +126,7 @@ const Profile = () => {
                 {currentUser.username}さんは
               </Typography>
               <Typography variant="h3" gutterBottom>
-                231,0820円
+                {total}円
               </Typography>
               <Typography variant="h6" gutterBottom>
                 分の本を登録しました

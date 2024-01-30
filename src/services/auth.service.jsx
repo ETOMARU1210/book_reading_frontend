@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 const API_URL = "http://localhost:8080/api/auth/";
 
@@ -20,8 +21,9 @@ class AuthService {
     });
   }
 
-  logout() {
+  logout(navigate) {
     localStorage.removeItem("user");
+    navigate("/")
   }
 
   register(username, email, password ) {

@@ -17,12 +17,20 @@ import { useRecoilState } from "recoil";
 import { SearchState }  from "../store/SearchState";
 import bookService from "../services/book.service";
 import { useNavigate } from "react-router-dom";
+import Card from '@mui/material/Card';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+import Divider from '@mui/material/Divider';
 
 const Search = () => {
   const {
     register,
     handleSubmit,
-    getValues
+    getValues,
+    formState: {
+      isValid,
+      isSubmitting
+    }
   } = useForm();
 
   const navigate = useNavigate();
@@ -38,7 +46,10 @@ const Search = () => {
       .get(`https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&author=${author}&applicationId=1029688552373040370`
        )
       .then((response) => {
-        setBooks(response.data.Items);
+        if (response.data.Items != 0) {
+          console.log(response)
+          setBooks(response.data.Items);
+        }
       })
   };
 
@@ -62,24 +73,23 @@ const Search = () => {
           <Grid item xs={9} md={10}>
             <TextField
               variant="outlined"
-              label="本の検索"
+              label="著書検索"
               fullWidth
-              {...register("search")}
+              {...register("search", {required: true})}
             />
           </Grid>
           <Grid item xs={3} md={2}>
-            <Button type="submit" style={{padding: "10px", background: "linear-gradient(#b08d5b,#c2a274"}}>
+            <Button variant="contained" type="submit" style={{padding: "10px"}} disabled={!isValid || isSubmitting}>
               <SearchIcon fontSize="large" style={{color: "white"}}/>
             </Button>
           </Grid>
         </Grid>
       </form>
-
       <List>
 
        {
-        books[0].id != -1 &&
-        books.map(book => (
+        books[0].id != -1  &&
+        books?.map(book => (
           <ListItem
           style={{ color: "white", marginBottom: "10px" }}
           sx={{

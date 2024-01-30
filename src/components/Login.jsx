@@ -13,12 +13,10 @@ const Login = () => {
     getValues,
     formState: { errors, isValid, isSubmitting },
   } = useForm();
-  const handleLogin = (data) => {
+  const handleLogin = () => {
 
-    authService.login(getValues("username"), getValues("password")).then(() => {
-      navigate("/");
-      window.location.reload();
-    });
+    authService.login(getValues("username"), getValues("password"));
+    navigate("/")
   };
 
   return (
