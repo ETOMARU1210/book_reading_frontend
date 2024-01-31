@@ -1,7 +1,7 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 
 const Login = () => {

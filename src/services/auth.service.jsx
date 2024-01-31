@@ -1,5 +1,7 @@
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { UserState } from "../store/UserState";
 
 const API_URL = "http://localhost:8080/api/auth/";
 
@@ -15,9 +17,10 @@ class AuthService {
       if (response.data.accessToken) {
         console.log(response.data);
         localStorage.setItem("user", JSON.stringify(response.data));
+        const [currentUser, setCurrentUser] = useRecoilState(UserState);
+        setCurrentUser(response.data);
+        console.log(currentUser);
       }
-
-      return response.data;
     });
   }
 
@@ -26,7 +29,7 @@ class AuthService {
     navigate("/")
   }
 
-  register(username, email, password ) {
+  register(username, email, password, navigate ) {
     return axios.post(API_URL + "signup", {
       username,
       email, 
@@ -34,9 +37,9 @@ class AuthService {
     }) .then(response => {
       if (response.data.accessToken) {
         localStorage.setItem("user", JSON.stringify(response.data));
+        const [, setCurrentUser] = useRecoilState(UserState);
+        setCurrentUser(this.getCurrentUser());
       }
-
-      return response.data;
     });
   }
 

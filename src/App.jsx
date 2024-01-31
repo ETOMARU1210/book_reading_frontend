@@ -5,27 +5,48 @@ import Home from "./components/Home";
 import Register from "./components/register";
 import Profile from "./components/Profile";
 import Search from "./components/Search";
-import {
-  RecoilRoot
-} from 'recoil';
+import { useRecoilState } from "recoil";
 import authService from "./services/auth.service";
-
+import { UserState } from "./store/UserState";
 
 function App() {
-
-  const loggedIn = authService.getCurrentUser();
+  const [currentUser, ] = useRecoilState(UserState);
+  console.log(currentUser)
 
   return (
-    <RecoilRoot>
+    <>
       <Header />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/login" element={loggedIn ? <Navigate replace to="/" /> : <Login />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/profile" element={loggedIn ? <Profile /> : <Navigate replace to="/login" />} />
-        <Route path="/search" element={loggedIn ? <Search /> : <Navigate replace to="/login" /> } />
+        <Route
+          path="/login"
+          element={
+            Object.keys(currentUser).length !== 0? <Navigate replace to="/" /> : <Login />
+          }
+        />
+        <Route path="/signup" element={  Object.keys(currentUser).length !== 0 ? <Navigate replace to="/" /> : <Register />} />
+        <Route
+          path="/profile"
+          element={
+            Object.keys(currentUser).length !== 0 ? (
+              <Profile />
+            ) : (
+              <Navigate replace to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            Object.keys(currentUser).length !== 0 ? (
+              <Search />
+            ) : (
+              <Navigate replace to="/login" />
+            )
+          }
+        />
       </Routes>
-    </RecoilRoot>
+    </>
   );
 }
 

@@ -17,10 +17,6 @@ import { useRecoilState } from "recoil";
 import { SearchState }  from "../store/SearchState";
 import bookService from "../services/book.service";
 import { useNavigate } from "react-router-dom";
-import Card from '@mui/material/Card';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
 
 const Search = () => {
   const {

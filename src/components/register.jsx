@@ -19,9 +19,8 @@ const Register = () => {
       getValues("username"),
       getValues("email"),
       getValues("password")
-    ).then(() => {
-      navigate("/");
-    });
+    )
+    navigate("/");
   };
 
   return (
