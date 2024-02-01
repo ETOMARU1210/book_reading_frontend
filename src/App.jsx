@@ -6,12 +6,12 @@ import Register from "./components/register";
 import Profile from "./components/Profile";
 import Search from "./components/Search";
 import { useRecoilState } from "recoil";
-import authService from "./services/auth.service";
 import { UserState } from "./store/UserState";
+import authService from "./services/auth.service";
 
 function App() {
-  const [currentUser, ] = useRecoilState(UserState);
-  console.log(currentUser)
+  const currentUser = authService.getCurrentUser();
+  console.log(currentUser);
 
   return (
     <>
@@ -21,14 +21,14 @@ function App() {
         <Route
           path="/login"
           element={
-            Object.keys(currentUser).length !== 0? <Navigate replace to="/" /> : <Login />
+            currentUser !== null? <Navigate replace to="/" /> : <Login />
           }
         />
-        <Route path="/signup" element={  Object.keys(currentUser).length !== 0 ? <Navigate replace to="/" /> : <Register />} />
+        <Route path="/signup" element={  currentUser? <Navigate replace to="/" /> : <Register />} />
         <Route
           path="/profile"
           element={
-            Object.keys(currentUser).length !== 0 ? (
+            currentUser ? (
               <Profile />
             ) : (
               <Navigate replace to="/login" />
@@ -38,7 +38,7 @@ function App() {
         <Route
           path="/search"
           element={
-            Object.keys(currentUser).length !== 0 ? (
+            currentUser? (
               <Search />
             ) : (
               <Navigate replace to="/login" />

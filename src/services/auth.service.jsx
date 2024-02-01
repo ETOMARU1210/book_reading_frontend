@@ -1,12 +1,9 @@
 import axios from "axios";
-import { Navigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { UserState } from "../store/UserState";
 
 const API_URL = "http://localhost:8080/api/auth/";
 
 class AuthService {
-  login(username, password) {
+  login(username, password, setCurrentUser) {
     axios
     .post(API_URL + "signin", {
       username,
@@ -15,31 +12,27 @@ class AuthService {
     )
     .then(response => {
       if (response.data.accessToken) {
-        console.log(response.data);
-        localStorage.setItem("user", JSON.stringify(response.data));
-        const [currentUser, setCurrentUser] = useRecoilState(UserState);
-        setCurrentUser(response.data);
-        console.log(currentUser);
+        JSON.parse(localStorage.setItem("user", JSON.stringify(response.data)))
+        console.log(JSON.parse(localStorage.getItem("user")))
+        setCurrentUser(this.getCurrentUser());
       }
     });
   }
 
-  logout(navigate) {
+  logout(setCurrentUser) {
+    setCurrentUser({});
     localStorage.removeItem("user");
     navigate("/")
   }
 
-  register(username, email, password, navigate ) {
+  register(username, email, password, setCurrentUser ) {
     return axios.post(API_URL + "signup", {
       username,
       email, 
       password
     }) .then(response => {
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-        const [, setCurrentUser] = useRecoilState(UserState);
-        setCurrentUser(this.getCurrentUser());
-      }
+      localStorage.setItem("user", JSON.stringify(response.data));
+      setCurrentUser(this.getCurrentUser());
     });
   }
 

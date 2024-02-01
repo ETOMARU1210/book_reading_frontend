@@ -20,7 +20,7 @@ import { useRecoilState } from "recoil";
 import { UserState } from "../store/UserState";
 
 function ResponsiveAppBar() {
-  const loginPages = ["マイページ", , "検索"];
+  const loginPages = ["マイページ",  "検索"];
   const loginPagesUrl = ["/profile", "/search"];
   const loginSettings = ["プロフィール", "ログアウト"];
   const nonloginSettings = ["サインアップ", "ログイン"];
@@ -29,10 +29,11 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
 
-  const [currentUser, ] = useRecoilState(UserState);
+  const [currentUser, setCurrentUser] = useRecoilState(UserState);
+  console.log(currentUser)
 
   const logOut = () => {
-    authService.logout(navigate);
+    authService.logout(setCurrentUser);
     navigate("/");
   };
 

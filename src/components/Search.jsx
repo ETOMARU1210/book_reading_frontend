@@ -84,7 +84,7 @@ const Search = () => {
       <List>
 
        {
-        books[0].id != -1  &&
+        books[0].id != -1  ?
         books?.map(book => (
           <ListItem
           style={{ color: "white", marginBottom: "10px" }}
@@ -154,7 +154,17 @@ const Search = () => {
             </Box>
           </Box>
         </ListItem>
-       ))
+       )) : 
+       <Card sx={{ minWidth: "100%" }}>
+       <CardContent>
+         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+           検索されていないか検索結果が一件もありません。
+         </Typography>
+       </CardContent>
+       <CardActions>
+         <Button size="small">Learn More</Button>
+       </CardActions>
+     </Card>
        }
       </List>
     </Container>
