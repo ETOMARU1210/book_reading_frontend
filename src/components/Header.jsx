@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,29 +16,24 @@ import { Link, Stack } from "@mui/material";
 import authService from "../services/auth.service";
 import LoginIcon from "@mui/icons-material/Login";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { UserState } from "../store/UserState";
 
 function ResponsiveAppBar() {
-  const loginPages = ["マイページ", , "検索"];
-  const loginPagesUrl = ["/profile", "", "/search"];
+  const loginPages = ["マイページ",  "検索"];
+  const loginPagesUrl = ["/profile", "/search"];
   const loginSettings = ["プロフィール", "ログアウト"];
   const nonloginSettings = ["サインアップ", "ログイン"];
   const nonloginUrl = ["/signup", "/login"];
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [currentUser, setCurrentUser] = React.useState(undefined);
-
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-    const user = authService.getCurrentUser();
-
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
+  const [currentUser, setCurrentUser] = useRecoilState(UserState);
+  console.log(currentUser)
 
   const logOut = () => {
-    authService.logout(navigate);
+    authService.logout(setCurrentUser);
     navigate("/");
   };
 
@@ -143,7 +137,7 @@ function ResponsiveAppBar() {
             読書アプリ
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {currentUser &&
+            {Object.keys(currentUser).length !== 0 &&
               loginPages.map((page, index) => (
                 <Link
                   key={page}
@@ -181,7 +175,7 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {currentUser
+              {Object.keys(currentUser).length !== 0
                 ? loginSettings.map((setting) => (
                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
                       {setting === "ログアウト" ? (

@@ -3,9 +3,13 @@ import { styled } from "@mui/system";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
+import { useRecoilState } from "recoil";
+import { UserState } from "../store/UserState";
 
 const Register = () => {
   let navigate = useNavigate();
+
+  const [,setCurrentUser] = useRecoilState(UserState);
 
   const {
     handleSubmit,
@@ -18,10 +22,10 @@ const Register = () => {
     authService.register(
       getValues("username"),
       getValues("email"),
-      getValues("password")
-    ).then(() => {
-      navigate("/");
-    });
+      getValues("password"),
+      setCurrentUser
+    )
+    navigate("/");
   };
 
   return (

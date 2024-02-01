@@ -1,11 +1,15 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
+import { useRecoilState } from "recoil";
+import { UserState } from "../store/UserState";
 
 const Login = () => {
   let navigate = useNavigate();
+
+  const [, setCurrentUser] = useRecoilState(UserState);
 
   const {
     handleSubmit,
@@ -15,7 +19,7 @@ const Login = () => {
   } = useForm();
   const handleLogin = () => {
 
-    authService.login(getValues("username"), getValues("password"));
+    authService.login(getValues("username"), getValues("password"), setCurrentUser);
     navigate("/")
   };
 

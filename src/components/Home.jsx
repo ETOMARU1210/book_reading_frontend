@@ -10,15 +10,13 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import authService from "../services/auth.service";
+import { useRecoilState } from "recoil";
+import { UserState } from "../store/UserState";
 
 const Home = () => {
-  const [currentUser, setCurrentUser] = useState(undefined);
-
-  useEffect(() => {
-    setCurrentUser(authService.getCurrentUser());
-  }, []);
+  const [currentUser, ] = useRecoilState(UserState);
 
   return (
     <Container>

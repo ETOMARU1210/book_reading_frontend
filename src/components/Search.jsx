@@ -17,10 +17,6 @@ import { useRecoilState } from "recoil";
 import { SearchState }  from "../store/SearchState";
 import bookService from "../services/book.service";
 import { useNavigate } from "react-router-dom";
-import Card from '@mui/material/Card';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
 
 const Search = () => {
   const {
@@ -88,7 +84,7 @@ const Search = () => {
       <List>
 
        {
-        books[0].id != -1  &&
+        books[0].id != -1  ?
         books?.map(book => (
           <ListItem
           style={{ color: "white", marginBottom: "10px" }}
@@ -158,7 +154,17 @@ const Search = () => {
             </Box>
           </Box>
         </ListItem>
-       ))
+       )) : 
+       <Card sx={{ minWidth: "100%" }}>
+       <CardContent>
+         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+           検索されていないか検索結果が一件もありません。
+         </Typography>
+       </CardContent>
+       <CardActions>
+         <Button size="small">Learn More</Button>
+       </CardActions>
+     </Card>
        }
       </List>
     </Container>
