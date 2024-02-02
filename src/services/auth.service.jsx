@@ -12,16 +12,14 @@ class AuthService {
     )
     .then(response => {
       if (response.data.accessToken) {
-        JSON.parse(localStorage.setItem("user", JSON.stringify(response.data)))
-        console.log(JSON.parse(localStorage.getItem("user")))
-        setCurrentUser(this.getCurrentUser());
+        // JSON.parse(localStorage.setItem("user", JSON.stringify(response.data)))
+        setCurrentUser(response.data);
       }
     });
   }
 
   logout(setCurrentUser) {
     setCurrentUser({});
-    localStorage.removeItem("user");
     navigate("/")
   }
 
@@ -31,14 +29,13 @@ class AuthService {
       email, 
       password
     }) .then(response => {
-      localStorage.setItem("user", JSON.stringify(response.data));
-      setCurrentUser(this.getCurrentUser());
+      setCurrentUser(response.data );
     });
   }
 
-  getCurrentUser() {
-    return JSON.parse(localStorage.getItem("user"));
-  }
+  // getCurrentUser() {
+  //   return JSON.parse(localStorage.getItem("user"));
+  // }
 }
 
 export default new AuthService();
