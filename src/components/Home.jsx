@@ -10,13 +10,11 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import authService from "../services/auth.service";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { UserState } from "../store/UserState";
 
 const Home = () => {
-  const [currentUser, ] = useRecoilState(UserState);
+  const currentUser = useRecoilValue(UserState);
 
   return (
     <Container>

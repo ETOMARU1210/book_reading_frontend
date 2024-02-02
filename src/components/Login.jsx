@@ -19,8 +19,7 @@ const Login = () => {
   } = useForm();
   const handleLogin = () => {
 
-    authService.login(getValues("username"), getValues("password"), setCurrentUser);
-    navigate("/")
+    authService.login(getValues("username"), getValues("password"), setCurrentUser, navigate);
   };
 
   return (

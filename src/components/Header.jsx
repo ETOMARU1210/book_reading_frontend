@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { UserState } from "../store/UserState";
 
-function ResponsiveAppBar() {
+const Header = () => {
   const loginPages = ["マイページ",  "検索"];
   const loginPagesUrl = ["/profile", "/search"];
   const loginSettings = ["プロフィール", "ログアウト"];
@@ -27,10 +27,10 @@ function ResponsiveAppBar() {
   const nonloginUrl = ["/signup", "/login"];
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const navigate = useNavigate();
 
   const [currentUser, setCurrentUser] = useRecoilState(UserState);
-  console.log(currentUser)
+  console.log(currentUser);
+  const navigate = useNavigate();
 
   const logOut = () => {
     authService.logout(setCurrentUser);
@@ -211,4 +211,4 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default Header;

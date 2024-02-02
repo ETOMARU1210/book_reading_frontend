@@ -4,9 +4,10 @@ import AuthService from "../services/auth.service";
 import { Box, Button, Container, Grid, Tab, Tabs } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import bookService from "../services/book.service";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { UserState } from "../store/UserState";
 import authService from "../services/auth.service";
+import { useNavigate } from "react-router-dom";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,7 +44,9 @@ function a11yProps(index) {
 
 const Profile = () => {
 
-  const [currentUser, ] = useRecoilState(UserState);
+  const navigate = useNavigate();
+
+  const currentUser = useRecoilValue(UserState);
 
   const [value, setValue] = useState(0);
   const [total, setTotal] = useState(0);
@@ -57,6 +60,10 @@ const Profile = () => {
   }
 
   useEffect(() => {
+    if (Object.keys(currentUser).length === 0) {
+      navigate("/login");
+      return;
+    }
     bookService.allUnStatusBooks().then((response) => {
       console.log(response);
       setAllUnBooks(response);

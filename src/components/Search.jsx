@@ -8,7 +8,7 @@ import {
   Box,
   Button,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import BookIcon from "@mui/icons-material/Book";
 import axios from "axios";
@@ -17,6 +17,7 @@ import { useRecoilState } from "recoil";
 import { SearchState }  from "../store/SearchState";
 import bookService from "../services/book.service";
 import { useNavigate } from "react-router-dom";
+import { UserState } from "../store/UserState";
 
 const Search = () => {
   const {
@@ -32,6 +33,13 @@ const Search = () => {
   const navigate = useNavigate();
 
   const [books, setBooks] = useRecoilState(SearchState);
+  const [currentUser, ] = useRecoilState(UserState);
+
+  useEffect(() => {
+    if (Object.keys(currentUser).length === 0) {
+      navigate("/login");
+    }
+  }, [])
 
   const onSubmit = () => {
     searchBooks(getValues("search"));
