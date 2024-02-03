@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = "http://localhost:8080/api/auth/";
 
 class AuthService {
-  login(username, password, setCurrentUser, navigate) {
+  login(username, password, setCurrentUser, navigate, setErrorMsg) {
     axios
     .post(API_URL + "signin", {
       username,
@@ -14,8 +14,13 @@ class AuthService {
       if (response.data.accessToken) {
         console.log(response.data);
         setCurrentUser(response.data);
+        setErrorMsg("");
         navigate("/")
       }
+    }).catch((e) => {
+      console.log(e);
+      setErrorMsg(e.response.data.message);
+      navigate("/login");
     });
   }
 
@@ -24,7 +29,7 @@ class AuthService {
     navigate("/")
   }
 
-  register(username, email, password, setCurrentUser, navigate ) {
+  register(username, email, password, setCurrentUser, navigate, setErrorMsg ) {
     return axios.post(API_URL + "signup", {
       username,
       email, 
@@ -33,8 +38,13 @@ class AuthService {
       if (response.data.accessToken) {
         console.log(response.data);
         setCurrentUser(response.data);
+        setErrorMsg("")
         navigate("/")
       }
+    }).catch(e => {
+      console.log(e.response.data);
+      setErrorMsg(e.response.data.message)
+      navigate("/signup")
     });
   }
 }

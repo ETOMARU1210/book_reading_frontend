@@ -1,44 +1,46 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, SnackbarContent, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 import { useRecoilState } from "recoil";
 import { UserState } from "../store/UserState";
+import { ErrorState } from "../store/ErrorMessageState";
+import { useEffect } from "react";
 
 const Login = () => {
   let navigate = useNavigate();
 
   const [, setCurrentUser] = useRecoilState(UserState);
+  const [errorMsg, setErrorMsg] = useRecoilState(ErrorState);
 
   const {
     handleSubmit,
     register,
     getValues,
-    formState: { errors, isValid, isSubmitting },
+    resetField,
+    formState: {  isValid, isSubmitting },
   } = useForm();
   const handleLogin = () => {
-
-    authService.login(getValues("username"), getValues("password"), setCurrentUser, navigate);
+    authService.login(
+      getValues("username"),
+      getValues("password"),
+      setCurrentUser,
+      navigate,
+      setErrorMsg
+    );
+    resetField("username", "");
+    resetField("password", "");
   };
 
   return (
     <Container>
+      {errorMsg && <SnackbarContent message={errorMsg} />}
       <LoginCard>
         <Typography variant="h5" gutterBottom>
           ログイン
         </Typography>
         <form onSubmit={handleSubmit(handleLogin)}>
-          {errors.username ? (
-            <TextField
-              error
-              id="filled-error-helper-text"
-              label="エラー"
-              helperText="ユーザー名が空白です"
-              variant="filled"
-              fullWidth
-            />
-          ) : (
             <>
               <TextField
                 variant="outlined"
@@ -48,19 +50,6 @@ const Login = () => {
                 {...register("username", { required: true })}
               />
             </>
-          )}
-
-          {errors.password ? (
-            <TextField
-              error
-              id="filled-error-helper-text"
-              label="エラー"
-              helperText="パスワードが空白です"
-              variant="filled"
-              type="password"
-              fullWidth
-            />
-          ) : (
             <>
               <TextField
                 variant="outlined"
@@ -71,8 +60,13 @@ const Login = () => {
                 {...register("password", { required: true })}
               />
             </>
-          )}
-          <Button variant="contained" color="success" fullWidth type="submit"  disabled={!isValid || isSubmitting}>
+          <Button
+            variant="contained"
+            color="success"
+            fullWidth
+            type="submit"
+            disabled={!isValid || isSubmitting}
+          >
             ログイン
           </Button>
         </form>

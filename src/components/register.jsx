@@ -1,15 +1,18 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, SnackbarContent, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 import { useRecoilState } from "recoil";
 import { UserState } from "../store/UserState";
+import { ErrorState } from "../store/ErrorMessageState";
 
 const Register = () => {
   let navigate = useNavigate();
 
-  const [,setCurrentUser] = useRecoilState(UserState);
+  const [, setCurrentUser] = useRecoilState(UserState);
+  const [errorMsg, setErrorMsg] = useRecoilState(ErrorState);
+  console.log(errorMsg);
 
   const {
     handleSubmit,
@@ -18,19 +21,20 @@ const Register = () => {
     formState: { errors, isValid, isSubmitting },
   } = useForm();
   const handleLogin = (data) => {
-
     authService.register(
       getValues("username"),
       getValues("email"),
       getValues("password"),
       setCurrentUser,
-      navigate
-    )
+      navigate,
+      setErrorMsg
+    );
     navigate("/");
   };
 
   return (
     <Container>
+      {errorMsg && <SnackbarContent message={errorMsg} />}
       <LoginCard>
         <Typography variant="h5" gutterBottom>
           サインアップ
@@ -73,9 +77,12 @@ const Register = () => {
                 margin="normal"
                 fullWidth
                 label="メールアドレス"
-                {...register("email", { required: true, pattern: {
-                  value:  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-                }
+                {...register("email", {
+                  required: true,
+                  pattern: {
+                    value:
+                      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                  },
                 })}
               />
             </>
@@ -99,7 +106,7 @@ const Register = () => {
                 fullWidth
                 label="パスワード"
                 type="password"
-                {...register("password", { required: true , minLength: 8})}
+                {...register("password", { required: true, minLength: 8 })}
               />
             </>
           )}

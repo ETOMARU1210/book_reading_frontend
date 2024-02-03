@@ -7,8 +7,6 @@ import {
   Typography,
   Box,
   Button,
-  Card,
-  CardContent,
 } from "@mui/material";
 import React, { useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";

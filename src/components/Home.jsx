@@ -3,7 +3,6 @@ import {
   Button,
   CardMedia,
   Container,
-  Snackbar,
   SnackbarContent,
   Stack,
   Typography,
@@ -199,7 +198,7 @@ const Home = () => {
         >
           あなたはどのくらい読んでいますか？
         </Typography>
-        {!currentUser && (
+        {Object.keys(currentUser).length === 0 && (
           <Button variant="outlined" color="error">
             <Link to="/login" style={{ textDecoration: "none", color: "red" }}>
               ログインして始める
