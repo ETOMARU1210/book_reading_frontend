@@ -3,6 +3,8 @@ import {
   Button,
   CardMedia,
   Container,
+  Snackbar,
+  SnackbarContent,
   Stack,
   Typography,
 } from "@mui/material";
@@ -10,14 +12,26 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Link } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { UserState } from "../store/UserState";
+import { useEffect, useState } from "react";
 
 const Home = () => {
-  const currentUser = useRecoilValue(UserState);
+  const [currentUser, setCurrentUser] = useRecoilState(UserState);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    if (currentUser.message) {
+      setMessage(currentUser.message);
+      setCurrentUser({...currentUser, message: ""})
+    }
+  })
 
   return (
     <Container>
+      {message && (
+        <SnackbarContent message={message} style={{ textAlign: "center" }} />
+      )}
       <Box mt={5} textAlign="center">
         <Typography
           variant="h2"
@@ -176,26 +190,23 @@ const Home = () => {
           </Grid>
         </Grid>
       </Box>
-        <Stack mt={5} textAlign="center" mb={{ xs: 5 }}>
-          <Typography
-            variant="button"
-            gutterBottom
-            fontSize={24}
-            fontWeight="bold"
-          >
-            あなたはどのくらい読んでいますか？
-          </Typography>
-          {
-          !currentUser && (
+      <Stack mt={5} textAlign="center" mb={{ xs: 5 }}>
+        <Typography
+          variant="button"
+          gutterBottom
+          fontSize={24}
+          fontWeight="bold"
+        >
+          あなたはどのくらい読んでいますか？
+        </Typography>
+        {!currentUser && (
           <Button variant="outlined" color="error">
             <Link to="/login" style={{ textDecoration: "none", color: "red" }}>
               ログインして始める
             </Link>
           </Button>
-          )
-                }
-        </Stack>
-
+        )}
+      </Stack>
     </Container>
   );
 };

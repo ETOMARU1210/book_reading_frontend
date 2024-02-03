@@ -23,7 +23,8 @@ const Register = () => {
       getValues("username"),
       getValues("email"),
       getValues("password"),
-      setCurrentUser
+      setCurrentUser,
+      navigate
     )
     navigate("/");
   };

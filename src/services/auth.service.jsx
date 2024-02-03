@@ -24,7 +24,7 @@ class AuthService {
     navigate("/")
   }
 
-  register(username, email, password, setCurrentUser ) {
+  register(username, email, password, setCurrentUser, navigate ) {
     return axios.post(API_URL + "signup", {
       username,
       email, 
@@ -37,10 +37,6 @@ class AuthService {
       }
     });
   }
-
-  // getCurrentUser() {
-  //   return JSON.parse(localStorage.getItem("user"));
-  // }
 }
 
 export default new AuthService();
