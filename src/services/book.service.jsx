@@ -1,12 +1,12 @@
 import axios from "axios";
 
 class BookService {
-  addBooks(book, navigate) {
+  addBooks(book, navigate, currentUser) {
     const API_URL = "http://localhost:8080/api/books/";
 
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = currentUser;
 
-    const authToken = user.accessToken;
+    const authToken = currentUser.accessToken;
 
     const axiosInstance = axios.create({
       baseURL: API_URL,
@@ -40,12 +40,10 @@ class BookService {
       });
   }
 
-  allBooks() {
+  allBooks(currentUser) {
     const API_URL = "http://localhost:8080/api/books/";
 
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    const authToken = user.accessToken;
+    const authToken = currentUser.accessToken;
 
     const axiosInstance = axios.create({
       baseURL: API_URL,
@@ -64,12 +62,10 @@ class BookService {
       });
   }
 
-  allUnStatusBooks() {
+  allUnStatusBooks(currentUser) {
     const API_URL = "http://localhost:8080/api/books/";
 
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    const authToken = user.accessToken;
+    const authToken = currentUser.accessToken;
 
     const axiosInstance = axios.create({
       baseURL: API_URL,
@@ -88,12 +84,10 @@ class BookService {
       });
   }
 
-  allCompleteStatusBooks() {
+  allCompleteStatusBooks(currentUser) {
     const API_URL = "http://localhost:8080/api/books/";
 
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    const authToken = user.accessToken;
+    const authToken = currentUser.accessToken;
 
     const axiosInstance = axios.create({
       baseURL: API_URL,
@@ -112,12 +106,10 @@ class BookService {
       });
   }
 
-  statusComplete(isbn) {
+  statusComplete(isbn, currentUser) {
     const API_URL = "http://localhost:8080/api/books/";
 
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    const authToken = user.accessToken;
+    const authToken = currentUser.accessToken;
 
     const axiosInstance = axios.create({
       baseURL: API_URL,

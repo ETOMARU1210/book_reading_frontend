@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import AuthService from "../services/auth.service";
 import { Box, Button, Container, Grid, Tab, Tabs } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import bookService from "../services/book.service";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { UserState } from "../store/UserState";
-import authService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 
 function CustomTabPanel(props) {
@@ -55,7 +53,7 @@ const Profile = () => {
   const [allCompleteBooks, setAllCompleteBooks] = useState([]);
   
   const statusCompleteUpdate = (isbn) => {
-    bookService.statusComplete(isbn);
+    bookService.statusComplete(isbn, currentUser);
     location.reload();
   }
 
@@ -64,16 +62,16 @@ const Profile = () => {
       navigate("/login");
       return;
     }
-    bookService.allUnStatusBooks().then((response) => {
+    bookService.allUnStatusBooks(currentUser).then((response) => {
       console.log(response);
       setAllUnBooks(response);
     });
-    bookService.allCompleteStatusBooks().then((response) => {
+    bookService.allCompleteStatusBooks(currentUser).then((response) => {
       console.log(response);
       setAllCompleteBooks(response);
     });
 
-  bookService.allBooks().then(response => {
+  bookService.allBooks(currentUser).then(response => {
     let total = 0;
     response.forEach(element => {
       total += parseInt(element.itemPrice);

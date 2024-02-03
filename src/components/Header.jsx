@@ -22,7 +22,7 @@ import { UserState } from "../store/UserState";
 const Header = () => {
   const loginPages = ["マイページ",  "検索"];
   const loginPagesUrl = ["/profile", "/search"];
-  const loginSettings = ["プロフィール", "ログアウト"];
+  const loginSettings = ["ログアウト"];
   const nonloginSettings = ["サインアップ", "ログイン"];
   const nonloginUrl = ["/signup", "/login"];
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -33,7 +33,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const logOut = () => {
-    authService.logout(setCurrentUser);
+    authService.logout(setCurrentUser, navigate);
     navigate("/");
   };
 
