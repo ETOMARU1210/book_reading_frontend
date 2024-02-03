@@ -2,12 +2,12 @@ import { atom } from "recoil";
 import { recoilPersist } from"recoil-persist";
 
 const { persistAtom } = recoilPersist({
-  key: "user-state",
+  key: "login-message",
   storage: sessionStorage,
 });
 
-export const UserState =atom({
-  key: "user",
-  default: {},
+export const LoginErrorState =atom({
+  key: "error",
+  default: "",
   effects_UNSTABLE: [persistAtom]
 })

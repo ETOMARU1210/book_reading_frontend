@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 import { useRecoilState } from "recoil";
 import { UserState } from "../store/UserState";
-import { ErrorState } from "../store/ErrorMessageState";
+import { SignUpErrorState } from "../store/SignUpErrorState";
 
 const Register = () => {
   let navigate = useNavigate();
 
   const [, setCurrentUser] = useRecoilState(UserState);
-  const [errorMsg, setErrorMsg] = useRecoilState(ErrorState);
+  const [errorMsg, setErrorMsg] = useRecoilState(SignUpErrorState);
   console.log(errorMsg);
 
   const {

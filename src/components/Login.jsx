@@ -5,21 +5,20 @@ import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 import { useRecoilState } from "recoil";
 import { UserState } from "../store/UserState";
-import { ErrorState } from "../store/ErrorMessageState";
-import { useEffect } from "react";
+import { LoginErrorState } from "../store/LoginErrorMessageState";
 
 const Login = () => {
   let navigate = useNavigate();
 
   const [, setCurrentUser] = useRecoilState(UserState);
-  const [errorMsg, setErrorMsg] = useRecoilState(ErrorState);
+  const [loginerrorMsg, setLoginErrorMsg] = useRecoilState(LoginErrorState);
 
   const {
     handleSubmit,
     register,
     getValues,
     resetField,
-    formState: {  isValid, isSubmitting },
+    formState: { isValid, isSubmitting },
   } = useForm();
   const handleLogin = () => {
     authService.login(
@@ -27,7 +26,7 @@ const Login = () => {
       getValues("password"),
       setCurrentUser,
       navigate,
-      setErrorMsg
+      setLoginErrorMsg
     );
     resetField("username", "");
     resetField("password", "");
@@ -35,31 +34,31 @@ const Login = () => {
 
   return (
     <Container>
-      {errorMsg && <SnackbarContent message={errorMsg} />}
+      {loginerrorMsg && <SnackbarContent message={loginerrorMsg} />}
       <LoginCard>
         <Typography variant="h5" gutterBottom>
           ログイン
         </Typography>
         <form onSubmit={handleSubmit(handleLogin)}>
-            <>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                label="ユーザー名"
-                {...register("username", { required: true })}
-              />
-            </>
-            <>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                label="パスワード"
-                type="password"
-                {...register("password", { required: true })}
-              />
-            </>
+          <>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              label="ユーザー名"
+              {...register("username", { required: true })}
+            />
+          </>
+          <>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              label="パスワード"
+              type="password"
+              {...register("password", { required: true })}
+            />
+          </>
           <Button
             variant="contained"
             color="success"
