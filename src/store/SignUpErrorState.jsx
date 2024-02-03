@@ -7,7 +7,7 @@ const { persistAtom } = recoilPersist({
 });
 
 export const SignUpErrorState =atom({
-  key: "error",
+  key: "signup-error-message",
   default: "",
   effects_UNSTABLE: [persistAtom]
 })

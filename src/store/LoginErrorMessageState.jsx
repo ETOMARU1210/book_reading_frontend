@@ -7,7 +7,7 @@ const { persistAtom } = recoilPersist({
 });
 
 export const LoginErrorState =atom({
-  key: "error",
+  key: "login-message",
   default: "",
   effects_UNSTABLE: [persistAtom]
 })
