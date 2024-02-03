@@ -181,7 +181,7 @@ const Search = () => {
                 textAlign="center"
                 gutterBottom
               >
-                検索されていないか検索結果が一件もありません。
+                検索されていないか該当する書籍が一件ありません
               </Typography>
         )}
       </List>
