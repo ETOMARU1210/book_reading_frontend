@@ -37,6 +37,8 @@ class BookService {
       .then((response) => {
         navigate("/profile");
         window.location.reload();
+      }).catch(e => {
+        console.log(e);
       });
   }
 
@@ -59,6 +61,8 @@ class BookService {
       })
       .then((response) => {
         return response.data;
+      }).catch(e => {
+        console.log(e);
       });
   }
 
@@ -81,6 +85,8 @@ class BookService {
       })
       .then((response) => {
         return response.data;
+      }).catch(e => {
+        console.log(e);
       });
   }
 
@@ -103,6 +109,8 @@ class BookService {
       })
       .then((response) => {
         return response.data;
+      }).catch(e => {
+        console.log(e);
       });
   }
 
