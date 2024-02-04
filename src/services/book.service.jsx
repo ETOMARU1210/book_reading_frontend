@@ -42,7 +42,7 @@ class BookService {
       });
   }
 
-  allBooks(currentUser) {
+  allBooks(currentUser, setBookErrorMessage) {
     const API_URL = "http://localhost:8080/api/books/";
 
     const authToken = currentUser.accessToken;
@@ -62,11 +62,11 @@ class BookService {
       .then((response) => {
         return response.data;
       }).catch(e => {
-        console.log(e);
+        setBookErrorMessage("本が追加できません")
       });
   }
 
-  allUnStatusBooks(currentUser) {
+  allUnStatusBooks(currentUser, setBookErrorMessage) {
     const API_URL = "http://localhost:8080/api/books/";
 
     const authToken = currentUser.accessToken;
@@ -86,11 +86,11 @@ class BookService {
       .then((response) => {
         return response.data;
       }).catch(e => {
-        console.log(e);
+        setBookErrorMessage("本が取得できません");
       });
   }
 
-  allCompleteStatusBooks(currentUser) {
+  allCompleteStatusBooks(currentUser, setBookErrorMessage) {
     const API_URL = "http://localhost:8080/api/books/";
 
     const authToken = currentUser.accessToken;
@@ -110,11 +110,11 @@ class BookService {
       .then((response) => {
         return response.data;
       }).catch(e => {
-        console.log(e);
+        setBookErrorMessage("本が取得できません");
       });
   }
 
-  statusComplete(isbn, currentUser) {
+  statusComplete(isbn, currentUser, setBookErrorMessage) {
     const API_URL = "http://localhost:8080/api/books/";
 
     const authToken = currentUser.accessToken;
@@ -136,7 +136,9 @@ class BookService {
             "Access-Control-Allow-Origin": "http://localhost:8080",
           },
         }
-      );
+      ).catch(e => {
+        setBookErrorMessage("本が取得できません");
+      });
   }
 }
 

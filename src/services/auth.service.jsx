@@ -22,8 +22,6 @@ class AuthService {
           // サーバーからのレスポンスがある場合
           if (e.response.status === 400) {
             setErrorMsg(e.response.data.message);
-            console.log(Promise.reject(e));
-            // location.reload();
           }
         }
       });
@@ -51,8 +49,13 @@ class AuthService {
       })
       .catch((e) => {
         // console.log(e.response.data);
-        setErrorMsg(e.response.data.message);
-        navigate("/signup");
+        if (e.response) {
+          // サーバーからのレスポンスがある場合
+          if (e.response.status === 400) {
+            setErrorMsg(e.response.data.message);
+            navigate("/signup");
+          }
+        }
       });
   }
 }

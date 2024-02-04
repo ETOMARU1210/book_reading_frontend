@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Box, Button, Container, Grid, Tab, Tabs } from "@mui/material";
+import { Box, Button, Container, Grid, SnackbarContent, Tab, Tabs } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import bookService from "../services/book.service";
 import { useRecoilValue } from "recoil";
 import { UserState } from "../store/UserState";
 import { useNavigate } from "react-router-dom";
+import { BookErrorState } from "../store/BookErrorMessage";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,9 +52,11 @@ const Profile = () => {
 
   const [allUnBooks, setAllUnBooks] = useState([]);
   const [allCompleteBooks, setAllCompleteBooks] = useState([]);
+
+  const [ bookErrorMessage, setBookErrorMessage] = useRecoilValue(BookErrorState);
   
   const statusCompleteUpdate = (isbn) => {
-    bookService.statusComplete(isbn, currentUser);
+    bookService.statusComplete(isbn, currentUser, setBookErrorMessage);
     location.reload();
   }
 
@@ -62,21 +65,27 @@ const Profile = () => {
       navigate("/login");
       return;
     }
-    bookService.allUnStatusBooks(currentUser).then((response) => {
+    bookService.allUnStatusBooks(currentUser, setBookErrorMessage).then((response) => {
       console.log(response);
       setAllUnBooks(response);
-    });
-    bookService.allCompleteStatusBooks(currentUser).then((response) => {
+    }).catch(e => {
+      setBookErrorMessage("本の情報が取得できません");
+    })
+    bookService.allCompleteStatusBooks(currentUser, setBookErrorMessage).then((response) => {
       console.log(response);
       setAllCompleteBooks(response);
+    }).catch(e => {
+      setBookErrorMessage("本の情報が取得できません");
     });
 
-  bookService.allBooks(currentUser).then(response => {
+  bookService.allBooks(currentUser, setBookErrorMessage).then(response => {
     let total = 0;
     response.forEach(element => {
       total += parseInt(element.itemPrice);
     });
     setTotal(total);
+  }).catch(e => {
+    setBookErrorMessage("本の情報が取得できません");
   })
   }, []);
 
@@ -86,6 +95,9 @@ const Profile = () => {
 
   return (
     <Container>
+            {bookErrorMessage && (
+        <SnackbarContent message={bookErrorMessage} style={{ textAlign: "center" }} />
+      )}
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs

@@ -52,6 +52,8 @@ const Search = () => {
           console.log(response);
           setBooks(response.data.Items);
         }
+      }).catch(e => {
+        console.log(e);
       });
   };
 
