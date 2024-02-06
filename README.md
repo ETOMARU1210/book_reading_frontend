@@ -3,8 +3,7 @@
 私は本を読むこどがあるのだが、読み終わったときにどんな本を読んだのかどのくらい読んだのか、読んだ本の値段の合計などを知りたいと思ったことがあった。そのような管理できるアプリがあれば自分はこのぐらいの本を読んだのかを可視化できるため、モチベーションにつながり、達成感を味わえるのではないかと思って作った。
 
 # デモ動画
-[C:\pleiades\2023-12\workspace\book_reading\book_reading_frontend\読書管理アプリ.mp4](https://media.giphy.com/media/JvG1Hagwk0fz6ukXSB/giphy.gif)
-
+<iframe src="https://giphy.com/embed/JvG1Hagwk0fz6ukXSB" width="480" height="258" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/stickers/transparent-JvG1Hagwk0fz6ukXSB">via GIPHY</a></p>
 
 # 特徴
 
