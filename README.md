@@ -3,6 +3,7 @@
 私は本を読むこどがあるのだが、読み終わったときにどんな本を読んだのかどのくらい読んだのか、読んだ本の値段の合計などを知りたいと思ったことがあった。そのような管理できるアプリがあれば自分はこのぐらいの本を読んだのかを可視化できるため、モチベーションにつながり、達成感を味わえるのではないかと思って作った。
 
 # デモ動画
+https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGVjeGV4ZHZ4OGVrMGF0YTVtdDY4OHpucHg4dGgzZWZkb3YyaTlmMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Cm2FX9xLU4EqFhpjIs/giphy.gif
 
 # 特徴
 
