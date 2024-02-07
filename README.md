@@ -26,19 +26,6 @@
 * vite 5.0.11
 * styled-components 6.1.8
 
-# インストールするもの
-
-```bash
-npm install recoil
-npm install recoil-persist
-npm install react-hook-form
-npm install react-router-dom
-npm install @mui/material @emotion/react @emotion/styled
-npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
-npm install axios
-npm install styled-components
-```
-
 # 実行方法
 
 ```bash
@@ -47,6 +34,9 @@ cd book_reading_frontend
 npm install
 npm run dev
 ```
+
+# バックエンドのプログラム
+https://github.com/ETOMARU1210/book_reading_backend
 
 # 著者
 
