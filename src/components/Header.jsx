@@ -107,7 +107,7 @@ const Header = () => {
               {loginPages.map((page, index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Link
-                    href={loginPagesUrl[index]}
+                    href={"https://book-reading-frontend-4xzysnve7-etomaru1210s-projects.vercel.app/" + loginPagesUrl[index]}
                     underline="none"
                     style={{ color: "black" }}
                   >
