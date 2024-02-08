@@ -12,7 +12,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
-import { Link, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
+import { Link } from "react-router-dom";
 import authService from "../services/auth.service";
 import LoginIcon from "@mui/icons-material/Login";
 import { useNavigate } from "react-router-dom";
@@ -107,7 +108,7 @@ const Header = () => {
               {loginPages.map((page, index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Link
-                    href={"https://book-reading-frontend-4xzysnve7-etomaru1210s-projects.vercel.app/" + loginPagesUrl[index]}
+                    to={ loginPagesUrl[index]}
                     underline="none"
                     style={{ color: "black" }}
                   >
@@ -141,7 +142,7 @@ const Header = () => {
               loginPages.map((page, index) => (
                 <Link
                   key={page}
-                  href={loginPagesUrl[index]}
+                  to={loginPagesUrl[index]}
                   underline="none"
                   style={{ color: "white" }}
                 >
