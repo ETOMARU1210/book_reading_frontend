@@ -30,7 +30,7 @@ class BookService {
         },
         {
           headers: {
-            "Access-Control-Allow-Origin": "http://localhost:8080",
+            "Access-Control-Allow-Origin": "https://book-reading-backend.fly.dev",
           },
         }
       )
@@ -43,7 +43,7 @@ class BookService {
   }
 
   allBooks(currentUser, setBookErrorMessage) {
-    const API_URL = "http://localhost:8080/api/books/";
+    const API_URL = "https://book-reading-backend.fly.dev/api/books/";
 
     const authToken = currentUser.accessToken;
 
@@ -56,7 +56,7 @@ class BookService {
     return axiosInstance
       .get(API_URL + "all", {
         headers: {
-          "Access-Control-Allow-Origin": "http://localhost:8080",
+          "Access-Control-Allow-Origin": "https://book-reading-backend.fly.dev/",
         },
       })
       .then((response) => {
@@ -67,7 +67,7 @@ class BookService {
   }
 
   allUnStatusBooks(currentUser, setBookErrorMessage) {
-    const API_URL = "http://localhost:8080/api/books/";
+    const API_URL = "https://book-reading-backend.fly.dev/api/books/";
 
     const authToken = currentUser.accessToken;
 
@@ -80,7 +80,7 @@ class BookService {
     return axiosInstance
       .get(API_URL + "allunstatus", {
         headers: {
-          "Access-Control-Allow-Origin": "http://localhost:8080",
+          "Access-Control-Allow-Origin": "https://book-reading-backend.fly.dev",
         },
       })
       .then((response) => {
@@ -91,7 +91,7 @@ class BookService {
   }
 
   allCompleteStatusBooks(currentUser, setBookErrorMessage) {
-    const API_URL = "http://localhost:8080/api/books/";
+    const API_URL = "https://book-reading-backend.fly.dev/api/books/";
 
     const authToken = currentUser.accessToken;
 
@@ -104,7 +104,7 @@ class BookService {
     return axiosInstance
       .get(API_URL + "allcompletestatus", {
         headers: {
-          "Access-Control-Allow-Origin": "http://localhost:8080",
+          "Access-Control-Allow-Origin": "https://book-reading-backend.fly.dev",
         },
       })
       .then((response) => {
@@ -115,7 +115,7 @@ class BookService {
   }
 
   statusComplete(isbn, currentUser, setBookErrorMessage) {
-    const API_URL = "http://localhost:8080/api/books/";
+    const API_URL = "https://book-reading-backend.fly.dev/api/books/";
 
     const authToken = currentUser.accessToken;
 
@@ -133,7 +133,7 @@ class BookService {
         },
         {
           headers: {
-            "Access-Control-Allow-Origin": "http://localhost:8080",
+            "Access-Control-Allow-Origin": "https://book-reading-backend.fly.dev",
           },
         }
       ).catch(e => {
