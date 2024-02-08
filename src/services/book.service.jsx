@@ -2,7 +2,7 @@ import axios from "axios";
 
 class BookService {
   addBooks(book, navigate, currentUser) {
-    const API_URL = "http://localhost:8080/api/books/";
+    const API_URL = "https://book-reading-backend.fly.dev/api/books/";
 
     const user = currentUser;
 
