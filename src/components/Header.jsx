@@ -196,7 +196,7 @@ const Header = () => {
                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
                       <Typography textAlign="center">
                         <Link
-                          href={nonloginUrl[index]}
+                          to={nonloginUrl[index]}
                           underline="none"
                           style={{ textDecoration: "none", color: "black" }}
                         >
