@@ -108,7 +108,7 @@ const Header = () => {
               {loginPages.map((page, index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Link
-                    to={ loginPagesUrl[index]}
+                    to={loginPagesUrl[index]}
                     underline="none"
                     style={{ color: "black" }}
                   >
