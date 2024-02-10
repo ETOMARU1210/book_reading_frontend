@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://book-reading-backend.fly.dev/api/auth/";
+const API_URL = "https://book-reading-backend.onrender.com/api/auth/";
 
 class AuthService {
   async login(username, password, setCurrentUser, navigate, setErrorMsg) {
