@@ -30,7 +30,7 @@ class BookService {
         },
         {
           headers: {
-            "Access-Control-Allow-Origin": "https://book-reading-backend.onrender.com/api/books/add",
+            "Access-Control-Allow-Origin": "https://book-reading-backend.onrender.com",
           },
         }
       )
