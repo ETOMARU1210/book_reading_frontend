@@ -15,9 +15,9 @@ import { useRecoilState } from "recoil";
 import { UserState } from "../store/UserState";
 import { useEffect, useState } from "react";
 import flowchart from"../assets/images/flowchart.png";
-import magnifying_glass from"../assets/images/magnifying_glass.png";
-import praise from"../assets/images/praise.png";
-import registration from"../assets/images/registration.JPG";
+import magnifying_glass from"https://book-reading-frontend.vercel.app/magnifying_glass.png";
+import praise from"https://book-reading-frontend.vercel.app/images/praise.png";
+import registration from"https://book-reading-frontend.vercel.app/assets/images/registration.JPG";
 
 const Home = () => {
   const [currentUser, setCurrentUser] = useRecoilState(UserState);
