@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  CardMedia,
   Container,
   SnackbarContent,
   Stack,
