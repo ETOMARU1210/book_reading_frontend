@@ -122,7 +122,7 @@ const Home = () => {
             <Card>
               <CardMedia
                 component="img"
-                image={"/images/registration.jpg"}
+                image={"/images/registration.png"}
                 alt="本の登録画像"
                 style={{ maxWidth: "58%", height: "auto" }}
               />
