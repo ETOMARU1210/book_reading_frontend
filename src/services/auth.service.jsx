@@ -6,14 +6,18 @@ const API_URL = "https://book-reading-backend.onrender.com/api/auth/";
 
 class AuthService {
 
-   login(username, password, setCurrentUser, navigate, setErrorMsg) {
+  login(username, password, setCurrentUser, navigate, setErrorMsg) {
     console.log(username);
     console.log(password);
     axios
       .post(API_URL + "signin", {
         username,
         password,
-      })
+      },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "https://book-reading-backend.onrender.com",
+      }})
       .then((response) => {
         if (response.data.accessToken) {
           console.log(response.data);
