@@ -34,7 +34,7 @@ const Login = () => {
 
   return (
     <Container>
-      {loginerrorMsg && <SnackbarContent message={loginerrorMsg} />}
+      {loginerrorMsg && <SnackbarContent message={loginerrorMsg} style={{maxWidth: "100%"}} />}
       <LoginCard>
         <Typography variant="h5" gutterBottom>
           ログイン
