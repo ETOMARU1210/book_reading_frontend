@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { UserState } from "../store/UserState";
 import { useEffect, useState } from "react";
-import flowchart from"../../public//images/flowchart.png";
+import flowchart from"../../public/images/flowchart.png";
 import magnifying_glass from"../../public/images/magnifying_glass.png";
 import praise from"../../public/images/praise.png";
 import registration from"../../public/images/registration.jpg";
