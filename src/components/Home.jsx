@@ -97,12 +97,12 @@ const Home = () => {
         >
           <Grid item xs={12} md={6}>
             <Card>
-              <CardMedia
+              {/* <CardMedia
                 component="img"
                 image={`${process.env.PUBLIC_URL}/images/magnifying_glass.png`}
                 alt="虫眼鏡の画像"
                 style={{ maxWidth: "50%", height: "auto" }}
-              />
+              /> */}
               <CardContent>
                 <Typography
                   variant="h2"
@@ -120,12 +120,12 @@ const Home = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Card>
-              <CardMedia
+              {/* <CardMedia
                 component="img"
-                image={`${process.env.PUBLIC_URL}/images/registration.jpg`}
+                image={`${process.env.PUBLIC_URL}/images/regstration.jpg`}
                 alt="本の登録画像"
                 style={{ maxWidth: "58%", height: "auto" }}
-              />
+              /> */}
               <CardContent>
                 <Typography
                   variant="h2"
@@ -143,12 +143,12 @@ const Home = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Card>
-              <CardMedia
+              {/* <CardMedia
                 component="img"
                 image={`${process.env.PUBLIC_URL}/images/praise.png`}
                 alt="自分をほめている画像"
                 style={{ maxWidth: "58%", height: "auto" }}
-              />
+              /> */}
               <CardContent>
                 <Typography
                   variant="h2"
@@ -166,12 +166,12 @@ const Home = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Card>
-              <CardMedia
+              {/* <CardMedia
                 component="img"
                 image={`${process.env.PUBLIC_URL}/images/flowchart.png`}
                 alt="フローチャートの画像"
                 style={{ maxWidth: "44%", height: "auto" }}
-              />
+              /> */}
               <CardContent>
                 <Typography
                   variant="h2"
