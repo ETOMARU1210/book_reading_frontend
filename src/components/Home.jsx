@@ -122,7 +122,7 @@ const Home = () => {
             <Card>
               <CardMedia
                 component="img"
-                image="/registration.png"
+                image="{``${process.env.PUBLIC_URL}/registration.png}`"
                 alt="本の登録画像"
                 style={{ maxWidth: "58%", height: "auto" }}
               />
