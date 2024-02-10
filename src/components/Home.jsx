@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import flowchart from"../assets/images/flowchart.png";
 import magnifying_glass from"../assets/images/magnifying_glass.png";
 import praise from"../assets/images/praise.png";
-import registration from"../assets/images/registration.jpg";
+import registration from"../assets/images/registration.JPG";
 
 const Home = () => {
   const [currentUser, setCurrentUser] = useRecoilState(UserState);

@@ -1,9 +1,12 @@
 import axios from "axios";
 
-class AuthService {
-   login(username, password, setCurrentUser, navigate, setErrorMsg) {
-    
+
+      
 const API_URL = "https://book-reading-backend.onrender.com/api/auth/";
+
+class AuthService {
+
+   login(username, password, setCurrentUser, navigate, setErrorMsg) {
     axios
       .post(API_URL + "signin", {
         username,
