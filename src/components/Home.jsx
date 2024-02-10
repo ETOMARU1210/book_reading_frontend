@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CardMedia,
   Container,
   SnackbarContent,
   Stack,
@@ -13,6 +14,10 @@ import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { UserState } from "../store/UserState";
 import { useEffect, useState } from "react";
+import flowchart from"../../public//images/flowchart.png";
+import magnifying_glass from"../../public/images/magnifying_glass.png";
+import praise from"../../public/images/praise.png";
+import registration from"../../public/images/registration.jpg";
 
 const Home = () => {
   const [currentUser, setCurrentUser] = useRecoilState(UserState);
@@ -96,6 +101,12 @@ const Home = () => {
         >
           <Grid item xs={12} md={6}>
             <Card>
+              <CardMedia
+                component="img"
+                image={magnifying_glass}
+                alt="虫眼鏡の画像"
+                style={{ maxWidth: "50%", height: "auto" }}
+              />
               <CardContent>
                 <Typography
                   variant="h2"
@@ -113,6 +124,12 @@ const Home = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Card>
+              <CardMedia
+                component="img"
+                image={registration}
+                alt="本の登録画像"
+                style={{ maxWidth: "58%", height: "auto" }}
+              />
               <CardContent>
                 <Typography
                   variant="h2"
@@ -130,6 +147,12 @@ const Home = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Card>
+              <CardMedia
+                component="img"
+                image={praise}
+                alt="自分をほめている画像"
+                style={{ maxWidth: "58%", height: "auto" }}
+              />
               <CardContent>
                 <Typography
                   variant="h2"
@@ -147,6 +170,12 @@ const Home = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Card>
+              <CardMedia
+                component="img"
+                image={flowchart}
+                alt="フローチャートの画像"
+                style={{ maxWidth: "44%", height: "auto" }}
+              />
               <CardContent>
                 <Typography
                   variant="h2"
