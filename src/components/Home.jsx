@@ -14,10 +14,10 @@ import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { UserState } from "../store/UserState";
 import { useEffect, useState } from "react";
-import flowchart from"../../public/images/flowchart.png";
-import magnifying_glass from"../../public/images/magnifying_glass.png";
-import praise from"../../public/images/praise.png";
-import registration from"../../public/images/registration.jpg";
+import flowchart from"/images/flowchart.png";
+import magnifying_glass from"/images/magnifying_glass.png";
+import praise from"/images/praise.png";
+import registration from"/images/registration.jpg";
 
 const Home = () => {
   const [currentUser, setCurrentUser] = useRecoilState(UserState);
