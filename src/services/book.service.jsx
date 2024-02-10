@@ -125,7 +125,7 @@ class BookService {
         Authorization: `Bearer ${authToken}`,
       },
     });
-    await axiosInstance
+    return await axiosInstance
       .post(
         API_URL + "statuscomplete",
         {
