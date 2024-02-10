@@ -195,7 +195,6 @@ const Header = () => {
                       <Typography textAlign="center">
                         <Link
                           to={nonloginUrl[index]}
-                          underline="none"
                           style={{ textDecoration: "none", color: "black" }}
                         >
                           {setting}

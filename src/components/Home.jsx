@@ -99,7 +99,7 @@ const Home = () => {
             <Card>
               <CardMedia
                 component="img"
-                image="src\assets\img\magnifying_glass.png"
+                image="img\magnifying_glass.png"
                 alt="虫眼鏡の画像"
                 style={{ maxWidth: "50%", height: "auto" }}
               />
@@ -122,7 +122,7 @@ const Home = () => {
             <Card>
               <CardMedia
                 component="img"
-                image="src\assets\img\registration.png"
+                image="img\registration.png"
                 alt="本の登録画像"
                 style={{ maxWidth: "58%", height: "auto" }}
               />
@@ -145,7 +145,7 @@ const Home = () => {
             <Card>
               <CardMedia
                 component="img"
-                image="src\assets\img\praise.png"
+                image="img\praise.png"
                 alt="自分をほめている画像"
                 style={{ maxWidth: "58%", height: "auto" }}
               />
@@ -168,7 +168,7 @@ const Home = () => {
             <Card>
               <CardMedia
                 component="img"
-                image="src\assets\img\flowchart.png"
+                image="img\flowchart.png"
                 alt="フローチャートの画像"
                 style={{ maxWidth: "44%", height: "auto" }}
               />
