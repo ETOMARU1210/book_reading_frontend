@@ -7,6 +7,8 @@ const API_URL = "https://book-reading-backend.onrender.com/api/auth/";
 class AuthService {
 
    login(username, password, setCurrentUser, navigate, setErrorMsg) {
+    console.log(username);
+    console.log(password);
     axios
       .post(API_URL + "signin", {
         username,
