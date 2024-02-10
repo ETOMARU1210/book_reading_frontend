@@ -109,8 +109,7 @@ const Header = () => {
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Link
                     to={loginPagesUrl[index]}
-                    underline="none"
-                    style={{ color: "black" }}
+                    style={{ color: "black", textDecoration: "none" }}
                   >
                     {page}
                   </Link>
@@ -143,8 +142,7 @@ const Header = () => {
                 <Link
                   key={page}
                   to={loginPagesUrl[index]}
-                  underline="none"
-                  style={{ color: "white" }}
+                  style={{ color: "white", textDecoration: "none"}}
                 >
                   <Stack direction="row" alignItems="top" mr={3}>
                     {page === "検索" && <ManageSearchIcon fontSize="small" />}
