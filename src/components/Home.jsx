@@ -14,10 +14,6 @@ import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { UserState } from "../store/UserState";
 import { useEffect, useState } from "react";
-import flowchart from"./images/flowchart.png";
-import magnifying_glass from"./images/magnifying_glass.png";
-import praise from"./images/praise.png";
-import registration from"./images/registration.JPG";
 
 const Home = () => {
   const [currentUser, setCurrentUser] = useRecoilState(UserState);
@@ -103,7 +99,7 @@ const Home = () => {
             <Card>
               <CardMedia
                 component="img"
-                image={magnifying_glass}
+                image="./images/flowchart.png"
                 alt="虫眼鏡の画像"
                 style={{ maxWidth: "50%", height: "auto" }}
               />
@@ -126,7 +122,7 @@ const Home = () => {
             <Card>
               <CardMedia
                 component="img"
-                image={registration}
+                image="./images/registration.png"
                 alt="本の登録画像"
                 style={{ maxWidth: "58%", height: "auto" }}
               />
@@ -149,7 +145,7 @@ const Home = () => {
             <Card>
               <CardMedia
                 component="img"
-                image={praise}
+                image="./images/praise.png"
                 alt="自分をほめている画像"
                 style={{ maxWidth: "58%", height: "auto" }}
               />
@@ -172,7 +168,7 @@ const Home = () => {
             <Card>
               <CardMedia
                 component="img"
-                image={flowchart}
+                image="./images/flowchart.png"
                 alt="フローチャートの画像"
                 style={{ maxWidth: "44%", height: "auto" }}
               />
