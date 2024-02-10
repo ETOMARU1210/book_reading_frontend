@@ -66,7 +66,7 @@ class BookService {
       });
   }
 
-  allUnStatusBooks(currentUser, setBookErrorMessage) {
+  async allUnStatusBooks(currentUser, setBookErrorMessage) {
     const API_URL = "https://book-reading-backend.onrender.com/api/books/";
 
     const authToken = currentUser.accessToken;
@@ -77,7 +77,7 @@ class BookService {
         Authorization: `Bearer ${authToken}`,
       },
     });
-    return axiosInstance
+    return await axiosInstance
       .get(API_URL + "allunstatus", {
         headers: {
           "Access-Control-Allow-Origin": "https://book-reading-backend.onrender.com",
@@ -90,7 +90,7 @@ class BookService {
       });
   }
 
-  allCompleteStatusBooks(currentUser, setBookErrorMessage) {
+  async allCompleteStatusBooks(currentUser, setBookErrorMessage) {
     const API_URL = "https://book-reading-backend.onrender.com/api/books/";
 
     const authToken = currentUser.accessToken;
@@ -101,7 +101,7 @@ class BookService {
         Authorization: `Bearer ${authToken}`,
       },
     });
-    return axiosInstance
+    return await  axiosInstance
       .get(API_URL + "allcompletestatus", {
         headers: {
           "Access-Control-Allow-Origin": "https://book-reading-backend.onrender.com",
@@ -114,7 +114,7 @@ class BookService {
       });
   }
 
-  statusComplete(isbn, currentUser, setBookErrorMessage) {
+  async statusComplete(isbn, currentUser, setBookErrorMessage) {
     const API_URL = "https://book-reading-backend.onrender.com/api/books/";
 
     const authToken = currentUser.accessToken;
@@ -125,7 +125,7 @@ class BookService {
         Authorization: `Bearer ${authToken}`,
       },
     });
-    axiosInstance
+    await axiosInstance
       .post(
         API_URL + "statuscomplete",
         {
