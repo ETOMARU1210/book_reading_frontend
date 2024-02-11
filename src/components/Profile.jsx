@@ -126,7 +126,7 @@ const Profile = () => {
           <Grid container spacing={1}>
             {allCompleteBooks.map((book) => (
               <Grid item md={2} xs={12}>
-                <img src={book.largeImageUrl} width="100%" style={{maxWidth: "100%"}} />
+                <img src={book.largeImageUrl}style={{maxWidth: "100%", height: "auto"}} />
               </Grid>
             ))}
           </Grid>
