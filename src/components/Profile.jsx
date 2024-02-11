@@ -96,7 +96,7 @@ const Profile = () => {
   return (
     <Container>
             {bookErrorMessage && (
-        <SnackbarContent message={bookErrorMessage} style={{ textAlign: "center" }} />
+        <SnackbarContent message={bookErrorMessage} style={{ textAlign: "center" }} sx={{maxWidth: "5%"}} />
       )}
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -113,7 +113,7 @@ const Profile = () => {
         <CustomTabPanel value={value} index={0}>
           <Grid container spacing={1}>
             {allUnBooks.map((book) => (
-              <Grid item md={2} xs={4} key={book.isbn}>
+              <Grid item md={2} xs={12} key={book.isbn}>
                 <img src={book.largeImageUrl} width="100%"/>
                 <Button variant="outlined" color="success" style={{width: "100%"}} onClick={() => statusCompleteUpdate(book.isbn)}>
                   読了
@@ -125,7 +125,7 @@ const Profile = () => {
         <CustomTabPanel value={value} index={1}>
           <Grid container spacing={1}>
             {allCompleteBooks.map((book) => (
-              <Grid item md={2} xs={4}>
+              <Grid item md={2} xs={12}>
                 <img src={book.largeImageUrl} />
               </Grid>
             ))}
