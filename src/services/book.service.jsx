@@ -1,6 +1,8 @@
 import axios from "axios";
 
 class BookService {
+
+  //本を追加する
   addBooks(book, navigate, currentUser) {
     const API_URL = "https://book-reading-backend.onrender.com/api/books/";
 
@@ -42,6 +44,7 @@ class BookService {
       });
   }
 
+  //本をすべて取得する
   allBooks(currentUser, setBookErrorMessage) {
     const API_URL = "https://book-reading-backend.onrender.com/api/books/";
 
@@ -65,6 +68,8 @@ class BookService {
         setBookErrorMessage("本が追加できません")
       });
   }
+
+  //未読了を取得する
 
   async allUnStatusBooks(currentUser, setBookErrorMessage) {
     const API_URL = "https://book-reading-backend.onrender.com/api/books/";
@@ -90,6 +95,7 @@ class BookService {
       });
   }
 
+  //読了を取得する
   async allCompleteStatusBooks(currentUser, setBookErrorMessage) {
     const API_URL = "https://book-reading-backend.onrender.com/api/books/";
 
@@ -114,6 +120,7 @@ class BookService {
       });
   }
 
+  //未読了から読了にする
   async statusComplete(isbn, currentUser, setBookErrorMessage) {
     const API_URL = "https://book-reading-backend.onrender.com/api/books/";
 

@@ -6,6 +6,7 @@ const API_URL = "https://book-reading-backend.onrender.com/api/auth/";
 
 class AuthService {
 
+  //ログイン処理
   login(username, password, setCurrentUser, navigate, setErrorMsg) {
     axios
       .post(API_URL + "signin", {
@@ -34,11 +35,13 @@ class AuthService {
       });
   }
 
+  //ログアウト処理
   logout(setCurrentUser, navigate) {
     setCurrentUser({});
     navigate("/");
   }
 
+  //新規登録+
   register(username, email, password, setCurrentUser, navigate, setErrorMsg) {
     return axios
       .post(API_URL + "signup", {
