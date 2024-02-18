@@ -1,7 +1,7 @@
 # [読書管理アプリ(フロントエンド)](https://github.com/ETOMARU1210/book_reading_frontend.git)
 
 # アプリURL
-[読書管理アプリ](https://book-reading-frontend.vercel.app/)
+https://book-reading-frontend.vercel.app/
 
 私は本を読むこどがあるのだが、読み終わったときにどんな本を読んだのかどのくらい読んだのか、読んだ本の値段の合計などを知りたいと思ったことがあった。そのような管理できるアプリがあれば自分はこのぐらいの本を読んだのかを可視化できるため、モチベーションにつながり、達成感を味わえるのではないかと思って作った。
 
