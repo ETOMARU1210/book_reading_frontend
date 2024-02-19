@@ -1,7 +1,5 @@
 import axios from "axios";
 
-
-      
 const API_URL = "https://book-reading-backend.onrender.com/api/auth/";
 
 class AuthService {
