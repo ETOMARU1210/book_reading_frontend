@@ -59,6 +59,7 @@ const Profile = () => {
     bookService.statusComplete(isbn, currentUser, setBookErrorMessage);
     bookService.allCompleteStatusBooks(currentUser, setBookErrorMessage).then((response) => {
       console.log(response);
+      setValue(tab => tab + 1)
       setAllCompleteBooks(response);
     }).catch(e => {
       setBookErrorMessage("本の情報が取得できません");
