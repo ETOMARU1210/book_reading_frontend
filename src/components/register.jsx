@@ -12,7 +12,6 @@ const Register = () => {
 
   const [, setCurrentUser] = useRecoilState(UserState);
   const [errorMsg, setErrorMsg] = useRecoilState(SignUpErrorState);
-  console.log(errorMsg);
 
   const {
     handleSubmit,

@@ -30,7 +30,6 @@ const Header = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const [currentUser, setCurrentUser] = useRecoilState(UserState);
-  console.log(currentUser);
   const navigate = useNavigate();
 
   const logOut = () => {
