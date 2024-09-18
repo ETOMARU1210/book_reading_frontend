@@ -57,7 +57,12 @@ const Profile = () => {
   
   const statusCompleteUpdate = (isbn) => {
     bookService.statusComplete(isbn, currentUser, setBookErrorMessage);
-    location.reload();
+    bookService.allCompleteStatusBooks(currentUser, setBookErrorMessage).then((response) => {
+      console.log(response);
+      setAllCompleteBooks(response);
+    }).catch(e => {
+      setBookErrorMessage("本の情報が取得できません");
+    });
   }
 
   useEffect(() => {
@@ -161,7 +166,7 @@ const Profile = () => {
                 maxWidth: "420px",
                 textAlign: "center",
                 borderRadius: "6px",
-                boxShadoデータw: "2px 2px 4px rgba(0,0,0,.3)",
+                boxShadow: "2px 2px 4px rgba(0,0,0,.3)",
               }}
             >
               <Typography
