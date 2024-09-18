@@ -36,7 +36,7 @@ class AuthService {
   //ログアウト処理
   logout(setCurrentUser, navigate) {
     setCurrentUser({});
-    navigate("/");
+    navigate("/login");
   }
 
   //新規登録+

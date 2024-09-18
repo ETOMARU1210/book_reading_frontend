@@ -34,7 +34,6 @@ const Header = () => {
 
   const logOut = () => {
     authService.logout(setCurrentUser, navigate);
-    navigate("/login");
   };
 
   const handleOpenNavMenu = (event) => {
