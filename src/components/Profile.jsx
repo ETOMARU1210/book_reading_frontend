@@ -89,7 +89,7 @@ const Profile = () => {
   }).catch(e => {
     setBookErrorMessage("本の情報が取得できません");
   })
-  }, [total]);
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
